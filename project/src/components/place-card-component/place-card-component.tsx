@@ -1,29 +1,29 @@
-type placeCardScreenProps = {
+type PlaceCardScreenProps = {
   rating: number;
-  is_premium: boolean,
+  isPremium: boolean,
   price : number,
   title: string,
   type: string,
-  preview_image: string,
+  previewImage: string,
 }
 
-const premiumMarker =
+const premiumMarker = (
   <div className="place-card__mark">
     <span>Premium</span>
   </div>
-;
+);
 
-function placeCardScreen(host: placeCardScreenProps): JSX.Element {
+function PlaceCardScreen(host: PlaceCardScreenProps): JSX.Element {
   const ratingStyle = {
     width: `${host.rating * 20}%`,
   };
 
   return (
     <article className="cities__place-card place-card">
-      {host.is_premium ? premiumMarker : ''}
+      {host.isPremium ? premiumMarker : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={host.preview_image} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={host.previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -54,4 +54,4 @@ function placeCardScreen(host: placeCardScreenProps): JSX.Element {
   );
 }
 
-export default placeCardScreen;
+export default PlaceCardScreen;
