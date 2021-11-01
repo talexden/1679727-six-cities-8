@@ -1,3 +1,5 @@
+import {getRatingStyle} from '../../util';
+
 const TEMPORARY_CARD = {
   rating: 4.3,
   isPremium: true,
@@ -15,6 +17,7 @@ const TEMPORARY_CARD = {
 //   title: string,
 //   type: string,
 //   previewImage: string,
+//   placeStyle: string,
 // }
 
 
@@ -26,10 +29,6 @@ const premiumMarker = (
 
 
 function PlaceCardScreen(): JSX.Element {
-  const ratingStyle = {
-    width: `${TEMPORARY_CARD.rating * 20}%`,
-  };
-
   return (
     <article className="cities__place-card place-card">
       {TEMPORARY_CARD.isPremium ? premiumMarker : ''}
@@ -53,7 +52,7 @@ function PlaceCardScreen(): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={ratingStyle}></span>
+            <span style={getRatingStyle(TEMPORARY_CARD.rating)}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
