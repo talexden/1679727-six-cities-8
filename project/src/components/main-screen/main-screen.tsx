@@ -1,14 +1,11 @@
-import PlaceCardScreen from '../place-card-component/place-card-component';
+import PlaceCardScreen from '../place-card-screen/place-card-screen';
 
 type MainScreenProps = {
-  host: {
-    rating: number;
-    isPremium: boolean,
-    price : number,
-    title: string,
-    type: string,
-    previewImage: string,
-  },
+  count: number,
+}
+
+function getCards (count: number) {
+  return new Array(count).fill({}).map(PlaceCardScreen);
 }
 
 function MainScreen(data: MainScreenProps): JSX.Element {
@@ -18,7 +15,7 @@ function MainScreen(data: MainScreenProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <a className="header__logo-link header__logo-link--active" href="#">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </a>
             </div>
@@ -63,7 +60,7 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
+                <a className="locations__item-link tabs__item tabs__item--active" href="#">
                   <span>Amsterdam</span>
                 </a>
               </li>
@@ -84,7 +81,7 @@ function MainScreen(data: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{data.count} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -101,11 +98,7 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {PlaceCardScreen(data.host)}
-                {PlaceCardScreen(data.host)}
-                {PlaceCardScreen(data.host)}
-                {PlaceCardScreen(data.host)}
-                {PlaceCardScreen(data.host)}
+                {getCards(data.count)}
               </div>
             </section>
             <div className="cities__right-section">

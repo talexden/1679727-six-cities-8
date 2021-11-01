@@ -1,11 +1,22 @@
-type PlaceCardScreenProps = {
-  rating: number;
-  isPremium: boolean,
-  price : number,
-  title: string,
-  type: string,
-  previewImage: string,
-}
+const TEMPORARY_CARD = {
+  rating: 4.3,
+  isPremium: true,
+  price : 123,
+  title: 'My Hotel',
+  type: 'Room',
+  previewImage: 'img/room.jpg',
+};
+
+
+// type PlaceCardScreenProps = {
+//   rating: number;
+//   isPremium: boolean,
+//   price : number,
+//   title: string,
+//   type: string,
+//   previewImage: string,
+// }
+
 
 const premiumMarker = (
   <div className="place-card__mark">
@@ -13,23 +24,24 @@ const premiumMarker = (
   </div>
 );
 
-function PlaceCardScreen(host: PlaceCardScreenProps): JSX.Element {
+
+function PlaceCardScreen(): JSX.Element {
   const ratingStyle = {
-    width: `${host.rating * 20}%`,
+    width: `${TEMPORARY_CARD.rating * 20}%`,
   };
 
   return (
     <article className="cities__place-card place-card">
-      {host.isPremium ? premiumMarker : ''}
+      {TEMPORARY_CARD.isPremium ? premiumMarker : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={host.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={TEMPORARY_CARD.previewImage} width="260" height="200" alt="Place" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{host.price}</b>
+            <b className="place-card__price-value">&euro;{TEMPORARY_CARD.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -46,9 +58,9 @@ function PlaceCardScreen(host: PlaceCardScreenProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{host.title}</a>
+          <a href="#">{TEMPORARY_CARD.title}</a>
         </h2>
-        <p className="place-card__type">{host.type}</p>
+        <p className="place-card__type">{TEMPORARY_CARD.type}</p>
       </div>
     </article>
   );

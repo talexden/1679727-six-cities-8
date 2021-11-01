@@ -3,18 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
 const TEMPORARY_DATA = {
-  host: {
-    rating: 4.3,
-    isPremium: true,
-    price : 123,
-    title: 'My Hotel',
-    type: 'Room',
-    previewImage: 'img/room.jpg',
-  },
+  count: 5,
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App host={TEMPORARY_DATA.host}/>
+    <App count={TEMPORARY_DATA.count}/>
   </React.StrictMode>,
   document.getElementById('root'));
