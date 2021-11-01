@@ -4,10 +4,6 @@ type MainScreenProps = {
   count: number,
 }
 
-function getCards (count: number) {
-  return new Array(count).fill({}).map(PlaceCardScreen);
-}
-
 function MainScreen(data: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
@@ -98,7 +94,11 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {getCards(data.count)}
+                <PlaceCardScreen />
+                <PlaceCardScreen />
+                <PlaceCardScreen />
+                <PlaceCardScreen />
+                <PlaceCardScreen />
               </div>
             </section>
             <div className="cities__right-section">
