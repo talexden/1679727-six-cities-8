@@ -2,7 +2,7 @@ import {getRatingStyle} from '../../util';
 
 const FAVORITES_RATING_TEMP = 3.7;
 
-function FavoritesScreen() {
+function FavoritesScreen(): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -59,8 +59,7 @@ function FavoritesScreen() {
                           <b className="place-card__price-value">&euro;180</b>
                           <span className="place-card__price-text">&#47;&nbsp;night</span>
                         </div>
-                        <button className="place-card__bookmark-button place-card__bookmark-button--active button"
-                                type="button">
+                        <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
                             <use href="#icon-bookmark"></use>
                           </svg>
@@ -92,8 +91,7 @@ function FavoritesScreen() {
                           <b className="place-card__price-value">&euro;80</b>
                           <span className="place-card__price-text">&#47;&nbsp;night</span>
                         </div>
-                        <button className="place-card__bookmark-button place-card__bookmark-button--active button"
-                                type="button">
+                        <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
                             <use href="#icon-bookmark"></use>
                           </svg>
@@ -136,8 +134,7 @@ function FavoritesScreen() {
                           <b className="place-card__price-value">&euro;180</b>
                           <span className="place-card__price-text">&#47;&nbsp;night</span>
                         </div>
-                        <button className="place-card__bookmark-button place-card__bookmark-button--active button"
-                                type="button">
+                        <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
                             <use href="#icon-bookmark"></use>
                           </svg>
@@ -168,7 +165,7 @@ function FavoritesScreen() {
         </a>
       </footer>
     </div>
-);
+  );
 }
 
 export default FavoritesScreen;

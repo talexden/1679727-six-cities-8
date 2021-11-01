@@ -1,10 +1,10 @@
-import {getRatingStyle} from "../../util";
+import {getRatingStyle} from '../../util';
 
 const REVIEW_RATING_TEMP = 4;
 const PROPERTY_RATING_TEMP = 4.8;
 const NEAR_PLACES_RATING_TEMP = 3.7;
 
-function PropertyScreen() {
+function PropertyScreen(): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -227,7 +227,7 @@ function PropertyScreen() {
                       To submit review please make sure to set <span className="reviews__star">rating</span> and
                       describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
                     </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled={true}>Submit</button>
+                    <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
                   </div>
                 </form>
               </section>
@@ -251,8 +251,7 @@ function PropertyScreen() {
                       <b className="place-card__price-value">&euro;80</b>
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
-                    <button className="place-card__bookmark-button place-card__bookmark-button--active button"
-                            type="button">
+                    <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
                         <use href="#icon-bookmark"></use>
                       </svg>

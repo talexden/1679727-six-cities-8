@@ -1,4 +1,4 @@
-function MainEmptyScreen():JSX.Element {
+function MainEmptyScreen(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
