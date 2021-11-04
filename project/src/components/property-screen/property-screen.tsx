@@ -227,7 +227,7 @@ function PropertyScreen(): JSX.Element {
                       To submit review please make sure to set <span className="reviews__star">rating</span> and
                       describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
                     </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+                    <button className="reviews__submit form__submit button" type="submit" disabled={true}>Submit</button>
                   </div>
                 </form>
               </section>
@@ -239,7 +239,7 @@ function PropertyScreen(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
                     <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
@@ -271,7 +271,7 @@ function PropertyScreen(): JSX.Element {
                 </div>
               </article>
 
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
                     <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
@@ -303,7 +303,7 @@ function PropertyScreen(): JSX.Element {
                 </div>
               </article>
 
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
                     <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image" />
