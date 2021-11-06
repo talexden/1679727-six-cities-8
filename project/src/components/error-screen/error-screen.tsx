@@ -1,8 +1,8 @@
-import Logo from '../logo/logo';
 import Logout from '../logout/logout';
+import Logo from '../logo/logo';
 import UserProfile from '../user-profile/user-profile';
 
-function FavoritesEmptyScreen(): JSX.Element {
+function ErrorScreen(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
       <header className="header">
@@ -30,8 +30,7 @@ function FavoritesEmptyScreen(): JSX.Element {
           <section className="favorites favorites--empty">
             <h1 className="visually-hidden">Favorites (empty)</h1>
             <div className="favorites__status-wrapper">
-              <b className="favorites__status">Nothing yet saved.</b>
-              <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+              <b className="favorites__status">404 Not Found.</b>
             </div>
           </section>
         </div>
@@ -45,4 +44,4 @@ function FavoritesEmptyScreen(): JSX.Element {
   );
 }
 
-export default FavoritesEmptyScreen;
+export default ErrorScreen;
