@@ -33,7 +33,7 @@ function PlaceCardScreen(): JSX.Element {
     <article className="cities__place-card place-card">
       {TEMPORARY_CARD.isPremium ? premiumMarker : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <a href="/">
           <img className="place-card__image" src={TEMPORARY_CARD.previewImage} width="260" height="200" alt="Place" />
         </a>
       </div>
@@ -57,7 +57,7 @@ function PlaceCardScreen(): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{TEMPORARY_CARD.title}</a>
+          <a href="/">{TEMPORARY_CARD.title}</a>
         </h2>
         <p className="place-card__type">{TEMPORARY_CARD.type}</p>
       </div>

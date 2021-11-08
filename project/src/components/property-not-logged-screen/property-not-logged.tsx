@@ -1,4 +1,6 @@
 import {getRatingStyle} from '../../util';
+import Logo from '../logo/logo';
+import Login from '../login/login';
 
 const REVIEW_RATING_TEMP = 4;
 const PROPERTY_RATING_TEMP = 4.8;
@@ -11,18 +13,12 @@ function PropertyNotLoggedScreen(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              <Logo />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </a>
+                  <Login />
                 </li>
               </ul>
             </nav>
@@ -222,7 +218,7 @@ function PropertyNotLoggedScreen(): JSX.Element {
                       To submit review please make sure to set <span className="reviews__star">rating</span> and
                       describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
                     </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+                    <button className="reviews__submit form__submit button" type="submit" disabled={true}>Submit</button>
                   </div>
                 </form>
               </section>
@@ -234,10 +230,10 @@ function PropertyNotLoggedScreen(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
+                  <a href="/">
+                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -260,16 +256,16 @@ function PropertyNotLoggedScreen(): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Wood and stone place</a>
+                    <a href="/">Wood and stone place</a>
                   </h2>
                   <p className="place-card__type">Private room</p>
                 </div>
               </article>
 
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
+                  <a href="/">
+                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -292,16 +288,16 @@ function PropertyNotLoggedScreen(): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Canal View Prinsengracht</a>
+                    <a href="/">Canal View Prinsengracht</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
               </article>
 
-              <article className="near-places__place-card place-card">
+              <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image" />
+                  <a href="/">
+                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place" />
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -324,7 +320,7 @@ function PropertyNotLoggedScreen(): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Nice, cozy, warm big bed apartment</a>
+                    <a href="/">Nice, cozy, warm big bed apartment</a>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
