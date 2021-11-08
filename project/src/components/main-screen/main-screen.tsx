@@ -91,7 +91,7 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
-                    <use href="#icon-arrow-select"></use>
+                    <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -102,11 +102,11 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCardScreen />
-                <PlaceCardScreen />
-                <PlaceCardScreen />
-                <PlaceCardScreen />
-                <PlaceCardScreen />
+                <PlaceCardScreen rating={80} />
+                <PlaceCardScreen rating={80} />
+                <PlaceCardScreen rating={80} />
+                <PlaceCardScreen rating={100} />
+                <PlaceCardScreen rating={80} />
               </div>
             </section>
             <div className="cities__right-section">

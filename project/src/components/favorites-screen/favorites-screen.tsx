@@ -1,9 +1,6 @@
-import {getRatingStyle} from '../../util';
 import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
-
-const FAVORITES_RATING_TEMP = 3.7;
 
 function FavoritesScreen(): JSX.Element {
   return (
@@ -56,14 +53,14 @@ function FavoritesScreen(): JSX.Element {
                         </div>
                         <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use href="#icon-bookmark"></use>
+                            <use xlinkHref="#icon-bookmark"></use>
                           </svg>
                           <span className="visually-hidden">In bookmarks</span>
                         </button>
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style={getRatingStyle(FAVORITES_RATING_TEMP)}></span>
+                          <span style={{width: '100%'}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -88,14 +85,14 @@ function FavoritesScreen(): JSX.Element {
                         </div>
                         <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use href="#icon-bookmark"></use>
+                            <use xlinkHref="#icon-bookmark"></use>
                           </svg>
                           <span className="visually-hidden">In bookmarks</span>
                         </button>
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style={getRatingStyle(FAVORITES_RATING_TEMP)}></span>
+                          <span style={{width: '80%'}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -131,14 +128,14 @@ function FavoritesScreen(): JSX.Element {
                         </div>
                         <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                           <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use href="#icon-bookmark"></use>
+                            <use xlinkHref="#icon-bookmark"></use>
                           </svg>
                           <span className="visually-hidden">In bookmarks</span>
                         </button>
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style={getRatingStyle(FAVORITES_RATING_TEMP)}></span>
+                          <span style={{width: '100%'}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>

@@ -29,7 +29,10 @@ function App(data: AppProps): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>
-          <PropertyScreen />
+          <PropertyScreen
+            rating={4.8}
+            commentRating={4}
+          />
         </Route>
         <Route>
           <ErrorScreen />

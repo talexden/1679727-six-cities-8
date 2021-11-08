@@ -1,5 +1,3 @@
-import {getRatingStyle} from '../../util';
-
 const TEMPORARY_CARD = {
   rating: 4.3,
   isPremium: true,
@@ -10,15 +8,15 @@ const TEMPORARY_CARD = {
 };
 
 
-// type PlaceCardScreenProps = {
-//   rating: number;
+type PlaceCardScreenProps = {
+  rating: number;
 //   isPremium: boolean,
 //   price : number,
 //   title: string,
 //   type: string,
 //   previewImage: string,
 //   placeStyle: string,
-// }
+}
 
 
 const premiumMarker = (
@@ -28,7 +26,7 @@ const premiumMarker = (
 );
 
 
-function PlaceCardScreen(): JSX.Element {
+function PlaceCardScreen(props: PlaceCardScreenProps): JSX.Element {
   return (
     <article className="cities__place-card place-card">
       {TEMPORARY_CARD.isPremium ? premiumMarker : ''}
@@ -45,14 +43,14 @@ function PlaceCardScreen(): JSX.Element {
           </div>
           <button className="place-card__bookmark-button button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use href="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={getRatingStyle(TEMPORARY_CARD.rating)}></span>
+            <span style={{width: `${props.rating * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
