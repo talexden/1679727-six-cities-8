@@ -1,14 +1,17 @@
-import PlaceCardScreen from '../place-card-screen/place-card-screen';
 import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import Location from '../location/location';
+import OffersList from '../offers-list/offers-list';
+import {offerType} from '../../types/offerType';
+import {getFavorites} from '../../filters';
 
 type MainScreenProps = {
-  count: number,
+  offers: offerType[],
 }
 
-function MainScreen(data: MainScreenProps): JSX.Element {
+function MainScreen({offers}: MainScreenProps): JSX.Element {
+  getFavorites(offers);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -85,13 +88,13 @@ function MainScreen(data: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{data.count} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -101,16 +104,10 @@ function MainScreen(data: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCardScreen rating={80} />
-                <PlaceCardScreen rating={80} />
-                <PlaceCardScreen rating={80} />
-                <PlaceCardScreen rating={100} />
-                <PlaceCardScreen rating={80} />
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map" />
             </div>
           </div>
         </div>
