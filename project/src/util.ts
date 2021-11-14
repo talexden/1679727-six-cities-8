@@ -1,7 +1,9 @@
-type getRatingStyleType = {
-  width: string;
+type getRatingStyleProperty = {
+  width: string,
 }
 
-export function getRatingStyle(rating: number): getRatingStyleType {
+function getRatingStyle (rating: number): getRatingStyleProperty {
   return {width: `${rating * 20}%`};
 }
+
+export {getRatingStyle};

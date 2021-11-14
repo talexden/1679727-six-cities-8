@@ -6,17 +6,20 @@ import FavoritesScreen from '../favorites-screen/favorites-screen';
 import PropertyScreen from '../property-screen/property-screen';
 import ErrorScreen from '../error-screen/error-screen';
 import PrivateRoute from '../private-route/private-route';
+import {reviewType} from '../../types/reviewType';
+import {offerType} from '../../types/offerType';
 
 type AppProps = {
-  count: number,
+  offers: offerType[],
+  reviews: reviewType[],
 };
 
-function App(data: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen count={data.count} />
+          <MainScreen offers={offers} />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <LoginScreen />
@@ -24,12 +27,15 @@ function App(data: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <FavoritesScreen />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => <FavoritesScreen offers={offers}/>}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>
-          <PropertyScreen />
+          <PropertyScreen
+            rating={4.8}
+            commentRating={4}
+          />
         </Route>
         <Route>
           <ErrorScreen />

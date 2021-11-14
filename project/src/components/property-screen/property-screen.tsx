@@ -1,14 +1,15 @@
-import {getRatingStyle} from '../../util';
 import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
+import {getRatingStyle} from '../../util';
+import ReviewForm from '../review-form/review-form';
 
-const DISABLED_OPTIONS = true;
-const REVIEW_RATING_TEMP = 4;
-const PROPERTY_RATING_TEMP = 4.8;
-const NEAR_PLACES_RATING_TEMP = 3.7;
+type PropertyScreenProps = {
+  rating: number,
+  commentRating: number
+}
 
-function PropertyScreen(): JSX.Element {
+function PropertyScreen(props: PropertyScreenProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -66,14 +67,14 @@ function PropertyScreen(): JSX.Element {
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
-                    <use href="#icon-bookmark"></use>
+                    <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={getRatingStyle(PROPERTY_RATING_TEMP)}></span>
+                  <span style={getRatingStyle(props.rating)} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">4.8</span>
@@ -167,7 +168,7 @@ function PropertyScreen(): JSX.Element {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={getRatingStyle(REVIEW_RATING_TEMP)}></span>
+                          <span style={getRatingStyle(props.commentRating)} />
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -179,62 +180,17 @@ function PropertyScreen(): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use href="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use href="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use href="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use href="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use href="#icon-star"></use>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and
-                      describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled={DISABLED_OPTIONS}>Submit</button>
-                  </div>
-                </form>
+                <ReviewForm />
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map" />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
+
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="/">
@@ -249,14 +205,14 @@ function PropertyScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use href="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">In bookmarks</span>
                     </button>
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(NEAR_PLACES_RATING_TEMP)}></span>
+                      <span style={getRatingStyle(props.rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -281,14 +237,14 @@ function PropertyScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use href="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(NEAR_PLACES_RATING_TEMP)}></span>
+                      <span style={getRatingStyle(props.rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -313,14 +269,14 @@ function PropertyScreen(): JSX.Element {
                     </div>
                     <button className="place-card__bookmark-button button" type="button">
                       <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use href="#icon-bookmark"></use>
+                        <use xlinkHref="#icon-bookmark" />
                       </svg>
                       <span className="visually-hidden">To bookmarks</span>
                     </button>
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(NEAR_PLACES_RATING_TEMP)}></span>
+                      <span style={getRatingStyle(props.rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
