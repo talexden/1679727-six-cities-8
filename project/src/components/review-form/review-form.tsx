@@ -6,7 +6,7 @@ function ReviewForm () {
   const [review, setReview] = useState('')
   const defaultStateRadio = [false, false, false, false, false];
   const [stateRadio, setStateRadio] = useState(defaultStateRadio);
-  
+
 
   return (
     <form className="reviews__form form" action="#" method="post">
