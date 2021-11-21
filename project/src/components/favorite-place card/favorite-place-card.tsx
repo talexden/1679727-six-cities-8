@@ -1,10 +1,9 @@
 import {getRatingStyle} from '../../util';
-import {offers} from '../../mocks/offers';
-import {offerType} from '../../types/offerType';
+import {OfferType} from '../../types/offerType';
 
 
 type FavoritePlaceCardProps = {
-  offer: offerType,
+  offer: OfferType,
 }
 
 

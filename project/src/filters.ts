@@ -1,10 +1,10 @@
-import {offerType} from './types/offerType';
-import {favoritesType} from './types/favoriteType';
+import {OfferType} from './types/offerType';
+import {FavoritesType} from './types/favoriteType';
 
 
-function getFavorites(offers: offerType[]): favoritesType {
+function getFavorites(offers: OfferType[]): FavoritesType {
   const cityNames = new Map;
-  offers.filter((offer) => {
+  offers.forEach((offer) => {
     if (offer.isFavorite) {
       if (cityNames.has(offer.city.name)) {
         cityNames.get(offer.city.name).offers.push(offer)
@@ -16,4 +16,8 @@ function getFavorites(offers: offerType[]): favoritesType {
   return cityNames;
 }
 
-export {getFavorites};
+function getCityOffers(city: string, offers: OfferType[]): OfferType[] {
+  return offers.filter((offer) => offer.city.name === city);
+}
+
+export {getFavorites, getCityOffers};

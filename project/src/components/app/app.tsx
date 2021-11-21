@@ -6,20 +6,21 @@ import FavoritesScreen from '../favorites-screen/favorites-screen';
 import PropertyScreen from '../property-screen/property-screen';
 import ErrorScreen from '../error-screen/error-screen';
 import PrivateRoute from '../private-route/private-route';
-import {reviewType} from '../../types/reviewType';
-import {offerType} from '../../types/offerType';
+import {ReviewType} from '../../types/reviewType';
+import {OfferType} from '../../types/offerType';
 
 type AppProps = {
-  offers: offerType[],
-  reviews: reviewType[],
+  offers: OfferType[],
+  reviews: ReviewType[],
 };
+
 
 function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen offers={offers} />
+          <MainScreen offers={offers}/>
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <LoginScreen />

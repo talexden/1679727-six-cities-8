@@ -1,18 +1,19 @@
 import {Link} from 'react-router-dom';
 
 type LocationProps = {
-  locationLink: string,
   isActive: boolean,
-  location: string,
+  name: string,
+  onClickName: () => void,
 }
 
-function Location(props: LocationProps): JSX.Element {
+function Location({name, onClickName, isActive}: LocationProps): JSX.Element {
   return (
     <Link
-      className={`locations__item-link tabs__item${props.isActive ? ' tabs__item--active' : ''}`}
-      to={props.locationLink}
+      className={`locations__item-link tabs__item${isActive ? ' tabs__item--active' : ''}`}
+      to='/'
+      onClick={onClickName}
     >
-      <span>{props.location}</span>
+      <span>{name}</span>
     </Link>
   );
 }

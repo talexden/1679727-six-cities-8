@@ -1,5 +1,5 @@
-import {offersType} from './offerType';
+import {OfferType} from './offerType';
 
 
 
-export type favoritesType = Map<string, offersType>;
+export type FavoritesType = Map<string, OfferType[]>;

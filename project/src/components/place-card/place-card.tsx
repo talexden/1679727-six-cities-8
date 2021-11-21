@@ -1,12 +1,12 @@
 import {MouseEvent} from 'react';
 import {getRatingStyle} from '../../util';
-import {offerType} from '../../types/offerType';
+import {OfferType} from '../../types/offerType';
 import {Link} from 'react-router-dom';
 
 type PlaceCardProps = {
-  offer: offerType,
+  offer: OfferType,
   key: number,
-  onSelect: (id: number) => void,
+  onSelect: () => void,
 }
 
 
@@ -20,7 +20,7 @@ const premiumMarker = (
 function PlaceCard({offer, onSelect}: PlaceCardProps): JSX.Element {
   const handleMouseEvent = (target: MouseEvent<HTMLElement>) => {
     target.preventDefault();
-    onSelect(offer.id);
+    onSelect();
   };
 
   return (

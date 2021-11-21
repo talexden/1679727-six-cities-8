@@ -1,4 +1,4 @@
-export type offerType = {
+export type OfferType = {
     city: {
         location: {
             latitude: number,
@@ -31,8 +31,4 @@ export type offerType = {
     rating: number,
     title: string,
     type: string,
-}
-
-export type offersType = {
-  offers: offerType[]
 }

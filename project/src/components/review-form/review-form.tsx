@@ -1,10 +1,11 @@
 import {ChangeEvent, useState} from 'react';
 import ReviewRating from '../review-rating/review-rating';
+import {setStateSelector} from '../../util';
 
 function ReviewForm () {
 
   const [review, setReview] = useState('')
-  const defaultStateRadio = [false, false, false, false, false];
+  const defaultStateRadio = new Array(5).fill(false);
   const [stateRadio, setStateRadio] = useState(defaultStateRadio);
 
 
@@ -18,12 +19,7 @@ function ReviewForm () {
                 isChecked={state}
                 key={`${id}${state}`}
                 id={id}
-                clickRadio={()=>{
-                  const newState = [...defaultStateRadio];
-                  newState[id] = true
-                  setStateRadio(newState);
-                  console.log(newState);
-                }}
+                onClickRadio={()=>{setStateRadio(setStateSelector(defaultStateRadio, id))}}
               />
           )}
         )}

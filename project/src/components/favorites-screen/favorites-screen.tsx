@@ -2,18 +2,17 @@ import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import FavoritesList from '../favorites-list/favorites-list';
-import {favoritesType} from '../../types/favoriteType';
-import {offers} from '../../mocks/offers';
-import {offerType} from '../../types/offerType';
+import {FavoritesType} from '../../types/favoriteType';
+import {OfferType} from '../../types/offerType';
 import {getFavorites} from '../../filters';
 
 type FavoritesScreenProps = {
-  offers: offerType[],
+  offers: OfferType[],
 }
 
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const favorites: favoritesType = getFavorites(offers);
+  const favorites: FavoritesType = getFavorites(offers);
   return (
     <div className="page">
       <header className="header">

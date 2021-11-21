@@ -1,10 +1,10 @@
 import FavoritePlaceCard from '../favorite-place card/favorite-place-card';
 import {Link} from 'react-router-dom';
-import {offersType} from '../../types/offerType';
+import {OfferType} from '../../types/offerType';
 
 type FavoritesListProps = {
   cityName: string,
-  favoriteOffers: offersType,
+  favoriteOffers: OfferType[],
 }
 
 
@@ -19,7 +19,7 @@ function FavoritesList({favoriteOffers, cityName}: FavoritesListProps): JSX.Elem
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteOffers.offers.map((offer) => {
+        {favoriteOffers.map((offer) => {
           return (
             <FavoritePlaceCard
               offer={offer}
