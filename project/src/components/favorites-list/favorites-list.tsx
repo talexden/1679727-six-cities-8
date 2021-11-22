@@ -1,14 +1,17 @@
 import FavoritePlaceCard from '../favorite-place card/favorite-place-card';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offerType';
+import {FavoritesType} from "../../types/favoriteType";
+import {getFavorites} from "../../filters";
 
 type FavoritesListProps = {
+  favoritesByCity: OfferType[],
   cityName: string,
-  favoriteOffers: OfferType[],
 }
 
 
-function FavoritesList({favoriteOffers, cityName}: FavoritesListProps): JSX.Element {
+function FavoritesList({favoritesByCity, cityName}: FavoritesListProps): JSX.Element {
+  console.log('favoritesByCity: ', favoritesByCity);
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -19,11 +22,12 @@ function FavoritesList({favoriteOffers, cityName}: FavoritesListProps): JSX.Elem
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteOffers.map((offer) => {
+        {favoritesByCity.map((offer) => {
+          console.log('offer: ', offer);
           return (
             <FavoritePlaceCard
               offer={offer}
-              key={offer.id}
+              key={`${offer.id}-${offer.title}`}
             />
           )}
         )}

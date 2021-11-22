@@ -5,14 +5,26 @@ import FavoritesList from '../favorites-list/favorites-list';
 import {FavoritesType} from '../../types/favoriteType';
 import {OfferType} from '../../types/offerType';
 import {getFavorites} from '../../filters';
+import {State} from "../../types/stateType";
+import {Dispatch} from "redux";
+import {Actions} from "../../types/actionType";
+import {SetCity} from "../../store/action";
+import {connect, ConnectedProps} from "react-redux";
 
 type FavoritesScreenProps = {
-  offers: OfferType[],
 }
 
+const mapStateToProps = ({offers}: State) => ({
+  origOffers: offers,
+});
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const favorites: FavoritesType = getFavorites(offers);
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & FavoritesScreenProps;
+
+function FavoritesScreen({origOffers}: ConnectedComponentProps): JSX.Element {
+  const favorites: FavoritesType = getFavorites(origOffers);
   return (
     <div className="page">
       <header className="header">
@@ -40,12 +52,13 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {[...favorites].map((favorite) => {
+              {[...favorites].map((favorite, id) => {
+                console.log('favorites: ', favorite);
                 return (
                   <FavoritesList
-                    favoriteOffers={favorite[1]}
-                    cityName ={favorite[0]}
-                    key={favorite[0]}
+                    favoritesByCity={favorite[1]}
+                    cityName = {favorite[0]}
+                    key={`${id}-CitiName-${favorite[0]}`}
                   />
                 )}
               )}
@@ -62,4 +75,6 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   );
 }
 
-export default FavoritesScreen;
+export {FavoritesScreen};
+
+export default connector(FavoritesScreen);

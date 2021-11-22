@@ -11,28 +11,22 @@ import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {SetCity} from '../../store/action';
 
+const CITIES = ['Paris','Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
+
 type MainScreenProps = {
-  offers: OfferType[],
 }
 
 const mapStateToProps = ({cityName, cityOffers}: State) => ({
   cityName: cityName, cityOffers: cityOffers,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onSelectCity(city: string, offers: OfferType[]) {
-    dispatch(SetCity(city, offers));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
 
 
-function MainScreen(props: ConnectedComponentProps): JSX.Element {
-  const {cityName, cityOffers} = props;
+function MainScreen({cityName, cityOffers}: ConnectedComponentProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -59,7 +53,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList />
+            <LocationList cities={CITIES}/>
           </section>
         </div>
         <div className="cities">
@@ -82,7 +76,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={cityOffers} />
+              <OffersList />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

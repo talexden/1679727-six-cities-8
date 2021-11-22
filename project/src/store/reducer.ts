@@ -2,6 +2,9 @@ import {State} from '../types/stateType';
 import {Actions, ActionType} from '../types/actionType';
 import {AMSTERDAM_OFFERS} from "../const";
 
+import {offers} from '../mocks/offers';
+import {reviews} from '../mocks/reviews';
+
 const initialState = {
   cityName: 'Amsterdam',
   cityOffers: AMSTERDAM_OFFERS,
@@ -9,6 +12,8 @@ const initialState = {
     comment: "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
     rating: 4,
   },
+  offers: offers,
+  reviews: reviews,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {

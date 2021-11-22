@@ -7,9 +7,9 @@ function getFavorites(offers: OfferType[]): FavoritesType {
   offers.forEach((offer) => {
     if (offer.isFavorite) {
       if (cityNames.has(offer.city.name)) {
-        cityNames.get(offer.city.name).offers.push(offer)
+        cityNames.get(offer.city.name).push(offer);
       } else {
-        cityNames.set(offer.city.name, {cityName: offer.city.name, offers: [offer]})
+        cityNames.set(offer.city.name, [offer]);
       }
     }
   })

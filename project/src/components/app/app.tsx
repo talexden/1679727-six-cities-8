@@ -10,17 +10,15 @@ import {ReviewType} from '../../types/reviewType';
 import {OfferType} from '../../types/offerType';
 
 type AppProps = {
-  offers: OfferType[],
-  reviews: ReviewType[],
 };
 
 
-function App({offers}: AppProps): JSX.Element {
+function App(props: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen offers={offers}/>
+          <MainScreen />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <LoginScreen />
@@ -28,7 +26,7 @@ function App({offers}: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <FavoritesScreen offers={offers}/>}
+          render={() => <FavoritesScreen />}
           authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
