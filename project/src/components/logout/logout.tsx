@@ -22,7 +22,6 @@ function Logout({logout}: PropsFromRedux): JSX.Element {
       className="header__nav-link"
       to="/"
       onClick={(evt) => {
-        debugger;
         evt.preventDefault();
         logout();
       }}
@@ -33,5 +32,4 @@ function Logout({logout}: PropsFromRedux): JSX.Element {
 }
 
 export {Logout};
-
 export default connector(Logout);
