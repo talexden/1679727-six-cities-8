@@ -1,6 +1,7 @@
 import {OfferType} from "./offerType";
 import {CommentPostType} from "./commentPostType";
 import {ReviewType} from "./reviewType";
+import {AuthorizationStatus} from "../const";
 
 export type State = {
   cityName: string,
@@ -8,4 +9,5 @@ export type State = {
   commentPost: CommentPostType,
   offers: OfferType[],
   reviews: ReviewType[],
+  authorizationStatus: AuthorizationStatus,
 };
