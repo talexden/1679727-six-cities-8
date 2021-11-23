@@ -1,11 +1,10 @@
 import {Link} from 'react-router-dom';
-import {State} from "../../types/stateType";
-import {Dispatch} from "redux";
-import {Actions} from "../../types/actionType";
-import {SetCity} from "../../store/action";
-import {connect, ConnectedProps} from "react-redux";
-import {offers} from "../../mocks/offers";
-import {OfferType} from "../../types/offerType";
+import {State} from '../../types/state-type';
+import {Dispatch} from 'redux';
+import {Actions} from '../../types/action-type';
+import {setCity} from '../../store/action';
+import {connect, ConnectedProps} from 'react-redux';
+import {OfferType} from '../../types/offer-type';
 
 
 type LocationProps = {
@@ -19,7 +18,7 @@ const mapStateToProps = ({cityName, offers}: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
   onSelectCity(city: string, offers: OfferType[]) {
-    dispatch(SetCity(city, offers));
+    dispatch(setCity(city, offers));
   },
 });
 
@@ -33,7 +32,7 @@ function Location({name, cityName, offers, onSelectCity}: ConnectedComponentProp
     <Link
       className={`locations__item-link tabs__item${cityName === name ? ' tabs__item--active' : ''}`}
       to='/'
-      onClick={() => {onSelectCity(name, offers)}}
+      onClick={() => onSelectCity(name, offers)}
     >
       <span>{name}</span>
     </Link>

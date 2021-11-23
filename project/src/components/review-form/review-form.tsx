@@ -2,9 +2,9 @@ import {ChangeEvent, useState} from 'react';
 import ReviewRating from '../review-rating/review-rating';
 import {setStateSelector} from '../../util';
 
-function ReviewForm () {
+function ReviewForm (): JSX.Element {
 
-  const [review, setReview] = useState('')
+  const [review, setReview] = useState('');
   const defaultStateRadio = new Array(5).fill(false);
   const [stateRadio, setStateRadio] = useState(defaultStateRadio);
 
@@ -13,16 +13,14 @@ function ReviewForm () {
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {stateRadio.map((state, id)=>
-          {return (
-              <ReviewRating
-                isChecked={state}
-                key={`${id}${state}`}
-                id={id}
-                onClickRadio={()=>{setStateRadio(setStateSelector(defaultStateRadio, id))}}
-              />
-          )}
-        )}
+        {stateRadio.map((state, id)=> (
+          <ReviewRating
+            isChecked={state}
+            key={state}
+            id={id}
+            onClickRadio={()=>{setStateRadio(setStateSelector(defaultStateRadio, id));}}
+          />
+        ))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -40,7 +38,7 @@ function ReviewForm () {
         <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
       </div>
     </form>
-  )
+  );
 }
 
 export default ReviewForm;

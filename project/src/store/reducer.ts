@@ -1,19 +1,18 @@
-import {State} from '../types/stateType';
-import {Actions, ActionType} from '../types/actionType';
-import {AMSTERDAM_OFFERS} from "../const";
-
-import {offers} from '../mocks/offers';
-import {reviews} from '../mocks/reviews';
+import {State} from '../types/state-type';
+import {Actions, ActionType} from '../types/action-type';
+import {AuthorizationStatus} from '../const';
 
 const initialState = {
-  cityName: 'Amsterdam',
-  cityOffers: AMSTERDAM_OFFERS,
+  cityName: 'Paris',
+  cityOffers: [],
   commentPost: {
-    comment: "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
-    rating: 4,
+    comment: '',
+    rating: 0,
   },
-  offers: offers,
-  reviews: reviews,
+  offers: [],
+  reviews: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -24,6 +23,13 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, commentPost: action.payload};
     case ActionType.ResetApp:
       return {...initialState};
+    case ActionType.LoadOffers:
+      const {offers} = action.payload;
+      return {...state, offers};
+    case ActionType.RequireAuthorization:
+      return {...state, authorizationStatus: action.payload, isDataLoaded: true};
+    case ActionType.RequireLogout:
+      return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
     default:
       return state;
   }

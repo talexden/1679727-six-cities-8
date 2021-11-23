@@ -6,8 +6,8 @@ type ReviewRatingProps = {
 
 
 function ReviewRating({onClickRadio, isChecked, id}: ReviewRatingProps): JSX.Element {
-  const radioValue = `${id}`
-  const radioId = `${id}-stars`
+  const radioValue = `${id}`;
+  const radioId = `${id}-stars`;
   return(
     <>
       <input
@@ -25,7 +25,7 @@ function ReviewRating({onClickRadio, isChecked, id}: ReviewRatingProps): JSX.Ele
         </svg>
       </label>
     </>
-  )
+  );
 }
 
 export default ReviewRating;

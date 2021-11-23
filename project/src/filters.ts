@@ -1,5 +1,5 @@
-import {OfferType} from './types/offerType';
-import {FavoritesType} from './types/favoriteType';
+import {OfferType} from './types/offer-type';
+import {FavoritesType} from './types/favorite-type';
 
 
 function getFavorites(offers: OfferType[]): FavoritesType {

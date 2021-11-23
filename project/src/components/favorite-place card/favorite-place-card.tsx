@@ -1,5 +1,5 @@
 import {getRatingStyle} from '../../util';
-import {OfferType} from '../../types/offerType';
+import {OfferType} from '../../types/offer-type';
 
 
 type FavoritePlaceCardProps = {

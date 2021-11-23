@@ -1,6 +1,6 @@
-import {OfferType} from "./offerType";
-import {CommentPostType} from "./commentPostType";
-import {ReviewType} from "./reviewType";
+import {OfferType} from "./offer-type";
+import {CommentPostType} from "./comment-post-type";
+import {ReviewType} from "./review-type";
 import {AuthorizationStatus} from "../const";
 
 export type State = {
@@ -10,4 +10,5 @@ export type State = {
   offers: OfferType[],
   reviews: ReviewType[],
   authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
 };

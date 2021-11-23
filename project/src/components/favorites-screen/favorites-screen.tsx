@@ -2,14 +2,10 @@ import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import FavoritesList from '../favorites-list/favorites-list';
-import {FavoritesType} from '../../types/favoriteType';
-import {OfferType} from '../../types/offerType';
+import {FavoritesType} from '../../types/favorite-type';
 import {getFavorites} from '../../filters';
-import {State} from "../../types/stateType";
-import {Dispatch} from "redux";
-import {Actions} from "../../types/actionType";
-import {SetCity} from "../../store/action";
-import {connect, ConnectedProps} from "react-redux";
+import {State} from '../../types/state-type';
+import {connect, ConnectedProps} from 'react-redux';
 
 type FavoritesScreenProps = {
 }
@@ -52,16 +48,7 @@ function FavoritesScreen({origOffers}: ConnectedComponentProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {[...favorites].map((favorite, id) => {
-                console.log('favorites: ', favorite);
-                return (
-                  <FavoritesList
-                    favoritesByCity={favorite[1]}
-                    cityName = {favorite[0]}
-                    key={`${id}-CitiName-${favorite[0]}`}
-                  />
-                )}
-              )}
+              {[...favorites].map((favorite, id) => <FavoritesList favoritesByCity={favorite[1]} cityName = {favorite[0]} key={favorite[0]}/> )}
             </ul>
           </section>
         </div>

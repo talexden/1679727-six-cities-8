@@ -1,21 +1,18 @@
 import {MouseEvent} from 'react';
 import {getRatingStyle} from '../../util';
-import {OfferType} from '../../types/offerType';
+import {OfferType} from '../../types/offer-type';
 import {Link} from 'react-router-dom';
 
 type PlaceCardProps = {
   offer: OfferType,
-  key: number,
   onSelect: () => void,
 }
-
 
 const premiumMarker = (
   <div className="place-card__mark">
     <span>Premium</span>
   </div>
 );
-
 
 function PlaceCard({offer, onSelect}: PlaceCardProps): JSX.Element {
   const handleMouseEvent = (target: MouseEvent<HTMLElement>) => {
@@ -30,7 +27,9 @@ function PlaceCard({offer, onSelect}: PlaceCardProps): JSX.Element {
     >
       {offer.isPremium ? premiumMarker : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.id}`}>
+        <Link
+          to={`/offer/${offer.id}`}
+        >
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
@@ -54,7 +53,10 @@ function PlaceCard({offer, onSelect}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link
+            to={`/offer/${offer.id}`}
+          >{offer.title}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

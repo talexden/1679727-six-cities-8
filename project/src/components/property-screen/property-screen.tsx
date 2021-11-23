@@ -3,13 +3,22 @@ import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import {getRatingStyle} from '../../util';
 import ReviewForm from '../review-form/review-form';
+import PropertyImageList from '../property-image-list/property-image-list';
+import {State} from '../../types/state-type';
+import {connect, ConnectedProps} from 'react-redux';
 
-type PropertyScreenProps = {
-  rating: number,
-  commentRating: number
-}
 
-function PropertyScreen(props: PropertyScreenProps): JSX.Element {
+const mapStateToProps = ({offers}: State) => ({
+  offers,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+
+function PropertyScreen({offers}: PropsFromRedux): JSX.Element {
+  const {images, type, rating, price} = offers[1];
   return (
     <div className="page">
       <header className="header">
@@ -35,26 +44,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Studio" />
-              </div>
-            </div>
+            <PropertyImageList images={images} type={type}/>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -74,10 +64,10 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={getRatingStyle(props.rating)} />
+                  <span style={getRatingStyle(rating)} />
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -91,7 +81,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -168,7 +158,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
                     <div className="reviews__info">
                       <div className="reviews__rating rating">
                         <div className="reviews__stars rating__stars">
-                          <span style={getRatingStyle(props.commentRating)} />
+                          <span style={getRatingStyle(4.3)} />
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -212,7 +202,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(props.rating)} />
+                      <span style={getRatingStyle(rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -244,7 +234,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(props.rating)} />
+                      <span style={getRatingStyle(rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -276,7 +266,7 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={getRatingStyle(props.rating)} />
+                      <span style={getRatingStyle(rating)} />
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -294,4 +284,6 @@ function PropertyScreen(props: PropertyScreenProps): JSX.Element {
   );
 }
 
-export default PropertyScreen;
+export {PropertyScreen};
+
+export default connector(PropertyScreen);

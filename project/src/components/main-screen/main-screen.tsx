@@ -3,13 +3,13 @@ import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import Location from '../location/location';
 import OffersList from '../offers-list/offers-list';
-import {OfferType} from '../../types/offerType';
+import {OfferType} from '../../types/offer-type';
 import LocationList from '../location-list/location-list';
-import {State} from '../../types/stateType';
-import {Actions} from '../../types/actionType';
+import {State} from '../../types/state-type';
+import {Actions} from '../../types/action-type';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {SetCity} from '../../store/action';
+import {setCity} from '../../store/action';
 
 const CITIES = ['Paris','Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
 

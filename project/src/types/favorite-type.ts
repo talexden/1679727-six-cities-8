@@ -1,4 +1,4 @@
-import {OfferType} from './offerType';
+import {OfferType} from './offer-type';
 
 
 
