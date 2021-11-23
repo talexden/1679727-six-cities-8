@@ -33,5 +33,4 @@ function Logout({logout}: PropsFromRedux): JSX.Element {
 }
 
 export {Logout};
-
 export default connector(Logout);
