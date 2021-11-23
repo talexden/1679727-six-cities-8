@@ -22,9 +22,9 @@ function Logout({logout}: PropsFromRedux): JSX.Element {
       className="header__nav-link"
       to="/"
       onClick={(evt) => {
+        debugger;
         evt.preventDefault();
         logout();
-        toast.info('CLICK_LOGOUT');
       }}
     >
       <span className="header__signout">Sign out</span>

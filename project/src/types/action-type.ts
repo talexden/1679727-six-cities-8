@@ -7,8 +7,9 @@ import {
   setCity,
   setComment,
   requireAuthorization,
-  requireLogout, redirectToRoute,
-} from "../store/action";
+  requireLogout,
+  redirectToRoute
+} from '../store/action';
 
 
 export enum ActionType {
