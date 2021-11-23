@@ -1,19 +1,23 @@
-import {offerType} from './types/offerType';
-import {favoritesType} from './types/favoriteType';
+import {OfferType} from './types/offer-type';
+import {FavoritesType} from './types/favorite-type';
 
 
-function getFavorites(offers: offerType[]): favoritesType {
+function getFavorites(offers: OfferType[]): FavoritesType {
   const cityNames = new Map;
-  offers.filter((offer) => {
+  offers.forEach((offer) => {
     if (offer.isFavorite) {
       if (cityNames.has(offer.city.name)) {
-        cityNames.get(offer.city.name).offers.push(offer)
+        cityNames.get(offer.city.name).push(offer);
       } else {
-        cityNames.set(offer.city.name, {cityName: offer.city.name, offers: [offer]})
+        cityNames.set(offer.city.name, [offer]);
       }
     }
   })
   return cityNames;
 }
 
-export {getFavorites};
+function getCityOffers(city: string, offers: OfferType[]): OfferType[] {
+  return offers.filter((offer) => offer.city.name === city);
+}
+
+export {getFavorites, getCityOffers};

@@ -1,20 +1,44 @@
 import {Link} from 'react-router-dom';
+import {State} from '../../types/state-type';
+import {Dispatch} from 'redux';
+import {Actions} from '../../types/action-type';
+import {setCity} from '../../store/action';
+import {connect, ConnectedProps} from 'react-redux';
+import {OfferType} from '../../types/offer-type';
+
 
 type LocationProps = {
-  locationLink: string,
-  isActive: boolean,
-  location: string,
+  name: string
 }
 
-function Location(props: LocationProps): JSX.Element {
+const mapStateToProps = ({cityName, offers}: State) => ({
+  cityName: cityName,
+  offers: offers,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+  onSelectCity(city: string, offers: OfferType[]) {
+    dispatch(setCity(city, offers));
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & LocationProps;
+
+function Location({name, cityName, offers, onSelectCity}: ConnectedComponentProps): JSX.Element {
   return (
     <Link
-      className={`locations__item-link tabs__item${props.isActive ? ' tabs__item--active' : ''}`}
-      to={props.locationLink}
+      className={`locations__item-link tabs__item${cityName === name ? ' tabs__item--active' : ''}`}
+      to='/'
+      onClick={() => onSelectCity(name, offers)}
     >
-      <span>{props.location}</span>
+      <span>{name}</span>
     </Link>
   );
 }
 
-export default Location;
+export {Location};
+
+export default connector(Location);

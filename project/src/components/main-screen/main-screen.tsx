@@ -3,15 +3,30 @@ import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import Location from '../location/location';
 import OffersList from '../offers-list/offers-list';
-import {offerType} from '../../types/offerType';
-import {getFavorites} from '../../filters';
+import {OfferType} from '../../types/offer-type';
+import LocationList from '../location-list/location-list';
+import {State} from '../../types/state-type';
+import {Actions} from '../../types/action-type';
+import {Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+import {setCity} from '../../store/action';
+
+const CITIES = ['Paris','Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
 
 type MainScreenProps = {
-  offers: offerType[],
 }
 
-function MainScreen({offers}: MainScreenProps): JSX.Element {
-  getFavorites(offers);
+const mapStateToProps = ({cityName, cityOffers}: State) => ({
+  cityName: cityName, cityOffers: cityOffers,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
+
+
+function MainScreen({cityName, cityOffers}: ConnectedComponentProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -38,57 +53,14 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive = {false}
-                  location = {'Paris'}
-                />
-              </li>
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive = {false}
-                  location = {'Cologne'}
-                />
-              </li>
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive = {false}
-                  location = {'Brussels'}
-                />
-              </li>
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive
-                  location = {'Amsterdam'}
-                />
-              </li>
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive = {false}
-                  location = {'Hamburg'}
-                />
-              </li>
-              <li className="locations__item">
-                <Location
-                  locationLink = {'/'}
-                  isActive = {false}
-                  location = {'Dusseldorf'}
-                />
-              </li>
-            </ul>
+            <LocationList cities={CITIES}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in {cityName}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -104,7 +76,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
@@ -116,4 +88,6 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export {MainScreen};
+
+export default connector(MainScreen);

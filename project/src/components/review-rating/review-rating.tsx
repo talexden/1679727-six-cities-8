@@ -1,13 +1,13 @@
 type ReviewRatingProps = {
   isChecked: boolean,
   id: number,
-  clickRadio: () => void,
+  onClickRadio: () => void,
 }
 
 
-function ReviewRating({clickRadio, isChecked, id}: ReviewRatingProps): JSX.Element {
-  const radioValue = `${id}`
-  const radioId = `${id}-stars`
+function ReviewRating({onClickRadio, isChecked, id}: ReviewRatingProps): JSX.Element {
+  const radioValue = `${id}`;
+  const radioId = `${id}-stars`;
   return(
     <>
       <input
@@ -17,7 +17,7 @@ function ReviewRating({clickRadio, isChecked, id}: ReviewRatingProps): JSX.Eleme
         id={radioId}
         type="radio"
         checked={isChecked}
-        onChange={clickRadio}
+        onChange={onClickRadio}
       />
       <label htmlFor={radioId} className="reviews__rating-label form__rating-label" title="good">
         <svg className="form__star-image" width="37" height="33">
@@ -25,7 +25,7 @@ function ReviewRating({clickRadio, isChecked, id}: ReviewRatingProps): JSX.Eleme
         </svg>
       </label>
     </>
-  )
+  );
 }
 
 export default ReviewRating;

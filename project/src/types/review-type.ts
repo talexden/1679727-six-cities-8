@@ -1,4 +1,4 @@
-export type reviewType = {
+export type ReviewType = {
   review: string,
     date: string,
     id: number,
@@ -12,5 +12,5 @@ export type reviewType = {
 }
 
 export type reviewsType = {
-  reviews: reviewType[],
+  reviews: ReviewType[],
 }

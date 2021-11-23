@@ -2,18 +2,25 @@ import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
 import FavoritesList from '../favorites-list/favorites-list';
-import {favoritesType} from '../../types/favoriteType';
-import {offers} from '../../mocks/offers';
-import {offerType} from '../../types/offerType';
+import {FavoritesType} from '../../types/favorite-type';
 import {getFavorites} from '../../filters';
+import {State} from '../../types/state-type';
+import {connect, ConnectedProps} from 'react-redux';
 
 type FavoritesScreenProps = {
-  offers: offerType[],
 }
 
+const mapStateToProps = ({offers}: State) => ({
+  origOffers: offers,
+});
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
-  const favorites: favoritesType = getFavorites(offers);
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & FavoritesScreenProps;
+
+function FavoritesScreen({origOffers}: ConnectedComponentProps): JSX.Element {
+  const favorites: FavoritesType = getFavorites(origOffers);
   return (
     <div className="page">
       <header className="header">
@@ -41,15 +48,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {[...favorites].map((favorite) => {
-                return (
-                  <FavoritesList
-                    favoriteOffers={favorite[1]}
-                    cityName ={favorite[0]}
-                    key={favorite[0]}
-                  />
-                )}
-              )}
+              {[...favorites].map((favorite, id) => <FavoritesList favoritesByCity={favorite[1]} cityName = {favorite[0]} key={favorite[0]}/> )}
             </ul>
           </section>
         </div>
@@ -63,4 +62,6 @@ function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   );
 }
 
-export default FavoritesScreen;
+export {FavoritesScreen};
+
+export default connector(FavoritesScreen);
