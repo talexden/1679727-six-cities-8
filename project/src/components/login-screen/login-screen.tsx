@@ -85,7 +85,7 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                onClick={() => history.push(AppRoute.Main)}
+                // onClick={() => history.push(AppRoute.Main)}
               >Sign in
               </button>
             </form>
