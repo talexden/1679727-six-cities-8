@@ -1,17 +1,11 @@
 import Logo from '../logo/logo';
 import Logout from '../logout/logout';
 import UserProfile from '../user-profile/user-profile';
-import Location from '../location/location';
 import OffersList from '../offers-list/offers-list';
-import {OfferType} from '../../types/offer-type';
 import LocationList from '../location-list/location-list';
 import {State} from '../../types/state-type';
-import {Actions} from '../../types/action-type';
-import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {setCity} from '../../store/action';
-
-const CITIES = ['Paris','Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
+import {CITIES} from '../../const';
 
 type MainScreenProps = {
 }
@@ -50,7 +44,7 @@ function MainScreen({cityName, cityOffers}: ConnectedComponentProps): JSX.Elemen
       </header>
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
+        <h1 className="visually-hidden">CITIES</h1>
         <div className="tabs">
           <section className="locations container">
             <LocationList cities={CITIES}/>

@@ -1,21 +1,27 @@
 import {ThunkActionResult} from '../types/action-type';
-import {loadOffers, redirectToRoute, requireAuthorization, requireLogout} from './action';
+import {loadOfferById, loadOffers, redirectToRoute, requireAuthorization, requireLogout, setCity} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus, START_CITY} from '../const';
 import {OfferType} from '../types/offer-type';
 import {AuthDataType} from '../types/auth-data-type';
 import {Adapter} from '../adapter/adapter';
-import {toast} from 'react-toastify';
 
-const AUTH_FAIL_MESSAGE = 'Не забудьте авторизоваться';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<OfferType[]>(APIRoute.Offers);
-
-    dispatch(loadOffers(data.map(Adapter.adaptOfferToClient)));
-
+    const offers = data.map(Adapter.adaptOfferToClient);
+    dispatch(loadOffers(offers));
+    dispatch(setCity(START_CITY, offers));
   };
+
+export const fetchOfferByIdAction = (offerId: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<OfferType>(`${APIRoute.Offers}/${offerId}`);
+    const offer = Adapter.adaptOfferToClient(data);
+    dispatch(loadOfferById(offer));
+  };
+
 
 
 export const checkAuthAction = (): ThunkActionResult =>
@@ -24,7 +30,6 @@ export const checkAuthAction = (): ThunkActionResult =>
       .then(() => {
         dispatch(requireAuthorization(AuthorizationStatus.Auth));
       });
-    toast.info(AUTH_FAIL_MESSAGE);
   };
 
 export const loginAction = ({login: email, password}: AuthDataType): ThunkActionResult =>

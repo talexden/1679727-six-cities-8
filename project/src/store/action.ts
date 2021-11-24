@@ -29,6 +29,13 @@ export const loadOffers = (offers: OfferType[]) => ({
   },
 } as const);
 
+export const loadOfferById = (offerById: OfferType) => ({
+  type: ActionType.LoadOfferById,
+  payload: {
+    offerById,
+  },
+} as const);
+
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
   type: ActionType.RequireAuthorization,
   payload: authStatus,
@@ -38,7 +45,7 @@ export const requireLogout = () => ({
   type: ActionType.RequireLogout,
 } as const);
 
-export const redirectToRoute = (url: AppRoute) => ({
+export const redirectToRoute = (url: AppRoute | string) => ({
   type: ActionType.RedirectToRoute,
   payload: url,
 } as const);

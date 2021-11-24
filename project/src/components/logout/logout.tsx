@@ -2,11 +2,11 @@ import {Link} from 'react-router-dom';
 import {ThunkAppDispatch} from '../../types/action-type';
 import {logoutAction} from '../../store/api-actions';
 import {connect, ConnectedProps} from 'react-redux';
-import { toast } from 'react-toastify';
+
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  logout() {
-    dispatch(logoutAction);
+  onLogout() {
+    dispatch(logoutAction());
   },
 });
 
@@ -16,15 +16,14 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function Logout({logout}: PropsFromRedux): JSX.Element {
+function Logout({onLogout}: PropsFromRedux): JSX.Element {
   return (
     <Link
       className="header__nav-link"
       to="/"
       onClick={(evt) => {
         evt.preventDefault();
-        logout();
-        toast.info('CLICK_LOGOUT');
+        onLogout();
       }}
     >
       <span className="header__signout">Sign out</span>
