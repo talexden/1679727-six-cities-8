@@ -7,8 +7,6 @@ import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {CITIES} from '../../const';
 
-type MainScreenProps = {
-}
 
 const mapStateToProps = ({cityName, cityOffers}: State) => ({
   cityName: cityName, cityOffers: cityOffers,
