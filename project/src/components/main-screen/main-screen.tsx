@@ -5,12 +5,8 @@ import OffersList from '../offers-list/offers-list';
 import LocationList from '../location-list/location-list';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
+import {CITIES} from '../../const';
 
-
-const CITIES = ['Paris','Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
-type MainScreenProps = {
-}
 
 const mapStateToProps = ({cityName, cityOffers}: State) => ({
   cityName: cityName, cityOffers: cityOffers,
@@ -46,7 +42,7 @@ function MainScreen({cityName, cityOffers}: ConnectedComponentProps): JSX.Elemen
       </header>
 
       <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
+        <h1 className="visually-hidden">CITIES</h1>
         <div className="tabs">
           <section className="locations container">
             <LocationList cities={CITIES}/>

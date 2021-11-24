@@ -13,6 +13,7 @@ import {ThunkAppDispatch} from './types/action-type';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {redirect} from './store/middlewares/redirect';
 
 
 const api = createAPI(
@@ -23,6 +24,7 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect),
   ),
 );
 

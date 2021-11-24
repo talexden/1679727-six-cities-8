@@ -16,9 +16,9 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
+const mapStateToProps = ({authorizationStatus, isOffersLoaded}: State) => ({
   authorizationStatus,
-  isDataLoaded,
+  isOffersLoaded,
 });
 
 const connector = connect(mapStateToProps);
@@ -27,9 +27,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
 function App(props: PropsFromRedux): JSX.Element {
-  const {authorizationStatus, isDataLoaded} = props;
+  const {authorizationStatus, isOffersLoaded} = props;
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isOffersLoaded) {
     return (
       <LoadingScreen />
     );

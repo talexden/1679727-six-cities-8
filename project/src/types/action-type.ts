@@ -3,6 +3,7 @@ import {AxiosInstance} from 'axios';
 import {State} from './state-type';
 import {
   loadOffers,
+  loadOfferById,
   resetApp,
   setCity,
   setComment,
@@ -17,6 +18,7 @@ export enum ActionType {
   SetComment = '/setReview',
   ResetApp = '/reset',
   LoadOffers = 'data/loadOffers',
+  LoadOfferById = 'data/loadOffer',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
   RedirectToRoute = '/redirectToRoute'
@@ -28,6 +30,7 @@ export type Actions =
   | ReturnType<typeof setComment>
   | ReturnType<typeof resetApp>
   | ReturnType<typeof loadOffers>
+  | ReturnType<typeof loadOfferById>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof redirectToRoute>;
