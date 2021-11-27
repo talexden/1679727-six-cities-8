@@ -3,13 +3,14 @@ import ReviewForm from '../review-form/review-form';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {nanoid} from 'nanoid';
-import {COMMENT_LIST_SIZE} from '../../const';
+import {AuthorizationStatus, COMMENT_LIST_SIZE} from '../../const';
 import {CommentType} from '../../types/comment-type';
 import {formatDateYYYYMMDD, formatDateMMMMYYYY} from '../../utils/util';
 
 
-const mapStateToProps = ({comments}: State) => ({
+const mapStateToProps = ({comments, authorizationStatus}: State) => ({
   comments,
+  authorizationStatus,
 });
 
 const sortCommentsByDate = (comments: CommentType[]) => [...comments].sort((a, b) => a.date > b.date ? -1 : 1);
@@ -18,7 +19,7 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function PropertyReviews({comments}: PropsFromRedux): JSX.Element {
+function PropertyReviews({comments, authorizationStatus}: PropsFromRedux): JSX.Element {
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
@@ -46,9 +47,7 @@ function PropertyReviews({comments}: PropsFromRedux): JSX.Element {
           ))
         }
       </ul>
-
-      <ReviewForm />
-
+      {(authorizationStatus === AuthorizationStatus.Auth) ? <ReviewForm /> : '' }
     </section>
   );
 }

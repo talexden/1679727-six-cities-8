@@ -29,7 +29,7 @@ export class Adapter {
     delete adaptedOffer.host['avatar_url'];
     delete adaptedOffer.host['is_pro'];
 
-    return <OfferType>adaptedOffer;
+    return adaptedOffer as OfferType;
   }
 
   static adaptCommentToClient(comment: any): CommentType {

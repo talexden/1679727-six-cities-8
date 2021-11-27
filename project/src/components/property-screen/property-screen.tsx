@@ -17,14 +17,16 @@ import Header from '../header/header';
 import PropertyHost from '../property-host/property-host';
 import PropertyReviews from '../property-reviews/property-reviews';
 import Map from '../map/map';
-import {MAX_NEAR_OFFERS} from '../../const';
+import {AppRoute, AuthorizationStatus, MAX_NEAR_OFFERS} from '../../const';
 import {OfferType} from '../../types/offer-type';
+import {redirectToRoute} from '../../store/action';
 
 
-const mapStateToProps = ({offerById, nearbyOffers, offers}: State) => ({
+const mapStateToProps = ({offerById, nearbyOffers, offers, authorizationStatus}: State) => ({
   offerById,
   nearbyOffers,
   offers,
+  authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -35,9 +37,13 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   loadNearbyOffers(offerId:number) {
     dispatch(fetchNearbyOffersAction(offerId));
   },
-  onClickFavorite(offer: OfferType) {
-    const status = Number(!offer.isFavorite);
-    dispatch(postFavoriteAction(offer.id, status));
+  onClickFavorite(offer: OfferType, authorizationStatus: AuthorizationStatus) {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      const status = Number(!offer.isFavorite);
+      dispatch(postFavoriteAction(offer.id, status));
+    } else {
+      dispatch(redirectToRoute(AppRoute.SignIn));
+    }
   },
 });
 
@@ -46,7 +52,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
-function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer, loadNearbyOffers, offers, onClickFavorite}: PropsFromRedux): JSX.Element {
+function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer, loadNearbyOffers, offers, onClickFavorite, authorizationStatus}: PropsFromRedux): JSX.Element {
   const offerId: {id: string} = useParams();
   useEffect(() => {
     loadSelectedOffer(Number(offerId.id));
@@ -87,7 +93,7 @@ function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer, loadNearbyO
                 <button
                   className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active ' : ''}button`}
                   type="button"
-                  onClick={()=> onClickFavorite(offerById) }
+                  onClick={()=> onClickFavorite(offerById, authorizationStatus) }
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark" />
@@ -125,6 +131,7 @@ function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer, loadNearbyO
               <PropertyHost />
 
               <PropertyReviews />
+
             </div>
           </div>
           <section className="property__map map">

@@ -87,6 +87,7 @@ export const logoutAction = (): ThunkActionResult =>
     api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireLogout());
-    dispatch(redirectToRoute(AppRoute.SignIn));
+    dispatch(fetchOffersAction());
+    dispatch(redirectToRoute(AppRoute.Main));
   };
 
