@@ -1,33 +1,41 @@
-import Logo from '../logo/logo';
-import Logout from '../logout/logout';
-import UserProfile from '../user-profile/user-profile';
-import FavoritesList from '../favorites-list/favorites-list';
-import {FavoritesType} from '../../types/favorite-type';
-import {getFavorites} from '../../filters';
+import HeaderLogo from '../header-logo/header-logo';
+import Logout from '../header-logout/header-logout';
+import UserProfile from '../header-user-profile/header-user-profile';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
+import {useEffect} from 'react';
+import {ThunkAppDispatch} from '../../types/action-type';
+import {fetchFavoritesAction} from '../../store/api-actions';
+import Favorites from '../favorites/favorites';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
-type FavoritesScreenProps = {
-}
 
-const mapStateToProps = ({offers}: State) => ({
-  origOffers: offers,
+const mapStateToProps = ({favoriteOffers}: State) => ({
+  favoriteOffers,
 });
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  loadFavoriteOffers () {
+    dispatch(fetchFavoritesAction());
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & FavoritesScreenProps;
 
-function FavoritesScreen({origOffers}: ConnectedComponentProps): JSX.Element {
-  const favorites: FavoritesType = getFavorites(origOffers);
+function FavoritesScreen({favoriteOffers, loadFavoriteOffers}: PropsFromRedux): JSX.Element {
+  useEffect(()=>{
+    loadFavoriteOffers();
+  }, []);
+
   return (
     <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              <HeaderLogo />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -42,17 +50,7 @@ function FavoritesScreen({origOffers}: ConnectedComponentProps): JSX.Element {
           </div>
         </div>
       </header>
-
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {[...favorites].map((favorite, id) => <FavoritesList favoritesByCity={favorite[1]} cityName = {favorite[0]} key={favorite[0]}/> )}
-            </ul>
-          </section>
-        </div>
-      </main>
+      {favoriteOffers.length > 0 ? <Favorites favoriteOffers={favoriteOffers}/> : <FavoritesEmpty />}
       <footer className="footer container">
         <a className="footer__logo-link" href="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />

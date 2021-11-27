@@ -1,3 +1,5 @@
+import {nanoid} from 'nanoid';
+
 type PropertyInsideListProps = {
   goods: string[];
 }
@@ -5,7 +7,7 @@ type PropertyInsideListProps = {
 function PropertyInsideList ({goods}: PropertyInsideListProps): JSX.Element {
   return (
     <ul className="property__inside-list">
-      {goods.map((good, id) => <li className="property__inside-item" key={good}>{good}</li>)}
+      {goods.map((good) => <li className="property__inside-item" key={nanoid()}>{good}</li>)}
     </ul>
   );
 }

@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import HeaderLogo from '../header-logo/header-logo';
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {loginAction} from '../../store/api-actions';
@@ -19,9 +19,7 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   },
 });
 
-
 const connector = connect(null, mapDispatchToProps);
-
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
@@ -49,7 +47,7 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              <HeaderLogo />
             </div>
           </div>
         </div>
@@ -88,7 +86,6 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                // onClick={() => history.push(AppRoute.Main)}
               >Sign in
               </button>
             </form>

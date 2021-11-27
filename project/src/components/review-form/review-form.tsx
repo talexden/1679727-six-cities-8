@@ -1,6 +1,7 @@
 import {ChangeEvent, useState} from 'react';
 import ReviewRating from '../review-rating/review-rating';
-import {setStateSelector} from '../../util';
+import {setStateSelector} from '../../utils/util';
+import {nanoid} from 'nanoid';
 
 function ReviewForm (): JSX.Element {
 
@@ -13,14 +14,16 @@ function ReviewForm (): JSX.Element {
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
+
         {stateRadio.map((state, id)=> (
           <ReviewRating
             isChecked={state}
-            key={state}
+            key={nanoid()}
             id={id}
             onClickRadio={()=>{setStateRadio(setStateSelector(defaultStateRadio, id));}}
           />
         ))}
+
       </div>
       <textarea
         className="reviews__textarea form__textarea"

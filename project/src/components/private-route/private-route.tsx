@@ -5,8 +5,9 @@ import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state-type';
 
 type PrivateRouteProps = RouteProps & {
-  render: () => JSX.Element;
-  authorizationStatus: AuthorizationStatus;
+  render: () => JSX.Element,
+  redirectAuthStatus: AuthorizationStatus,
+  redirect: AppRoute,
 }
 
 const mapStateToProps = ({authorizationStatus}: State) => ({
@@ -20,16 +21,16 @@ type ConnectedComponentProps = PropsFromRedux & PrivateRouteProps;
 
 
 function PrivateRoute(props: ConnectedComponentProps): JSX.Element {
-  const {exact, path, render, authorizationStatus} = props;
+  const {redirect, exact, path, render, authorizationStatus, redirectAuthStatus} = props;
 
   return (
     <Route
       exact={exact}
       path={path}
       render={() => (
-        authorizationStatus === AuthorizationStatus.Auth
-          ? render()
-          : <Redirect to={AppRoute.SignIn} />
+        authorizationStatus === redirectAuthStatus
+          ? <Redirect to={redirect} />
+          : render()
       )}
     />
   );

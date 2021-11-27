@@ -1,4 +1,4 @@
-import {getRatingStyle} from '../../util';
+import {getRatingStyle} from '../../utils/util';
 import {OfferType} from '../../types/offer-type';
 
 

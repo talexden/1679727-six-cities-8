@@ -16,21 +16,23 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function Logout({onLogout}: PropsFromRedux): JSX.Element {
+function HeaderLogout({onLogout}: PropsFromRedux): JSX.Element {
   return (
-    <Link
-      className="header__nav-link"
-      to="/"
-      onClick={(evt) => {
-        evt.preventDefault();
-        onLogout();
-      }}
-    >
-      <span className="header__signout">Sign out</span>
-    </Link>
+    <li className="header__nav-item">
+      <Link
+        className="header__nav-link"
+        to="/"
+        onClick={(evt) => {
+          evt.preventDefault();
+          onLogout();
+        }}
+      >
+        <span className="header__signout">Sign out</span>
+      </Link>
+    </li>
   );
 }
 
-export {Logout};
+export {HeaderLogout};
 
-export default connector(Logout);
+export default connector(HeaderLogout);

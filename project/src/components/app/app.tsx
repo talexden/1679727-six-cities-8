@@ -42,12 +42,19 @@ function App(props: PropsFromRedux): JSX.Element {
         <Route exact path={AppRoute.Main}>
           <MainScreen />
         </Route>
-        <Route exact path={AppRoute.SignIn}>
-          <LoginScreen />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.SignIn}
+          redirectAuthStatus={AuthorizationStatus.Auth}
+          redirect={AppRoute.Main}
+          render={() => <LoginScreen />}
+        >
+        </PrivateRoute>
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
+          redirectAuthStatus={AuthorizationStatus.NoAuth}
+          redirect={AppRoute.SignIn}
           render={() => <FavoritesScreen />}
         >
         </PrivateRoute>

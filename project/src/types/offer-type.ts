@@ -1,23 +1,30 @@
+export type CityType = {
+  location: {
+    latitude: number,
+    longitude: number,
+    zoom: number,
+  },
+  name: string,
+}
+
+type LocationType = {
+  latitude: number,
+  longitude: number,
+  zoom: number,
+}
+
+type HostType = {
+  avatarUrl: string,
+  id: number,
+  isPro: boolean,
+  name: string,
+}
+
+
 export type OfferType = {
-    city: {
-        location: {
-            latitude: number,
-            longitude: number,
-            zoom: number,
-        },
-        name: string,
-    },
-    location: {
-        latitude: number,
-        longitude: number,
-        zoom: number,
-    },
-    host: {
-        avatarUrl: string,
-        id: number,
-        isPro: boolean,
-        name: string,
-    },
+    city: CityType,
+    location: LocationType,
+    host: HostType,
     id: number,
     bedrooms: number,
     description: string,

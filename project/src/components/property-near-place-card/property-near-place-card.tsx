@@ -1,5 +1,5 @@
 import {OfferType} from '../../types/offer-type';
-import {getRatingStyle} from '../../util';
+import {getRatingStyle} from '../../utils/util';
 import {Link} from 'react-router-dom';
 
 type PropertyNearPlaceCardProps = {

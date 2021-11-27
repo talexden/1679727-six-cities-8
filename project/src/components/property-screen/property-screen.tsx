@@ -1,28 +1,30 @@
-import Logo from '../logo/logo';
-import Logout from '../logout/logout';
-import UserProfile from '../user-profile/user-profile';
-import {getRatingStyle} from '../../util';
-import ReviewForm from '../review-form/review-form';
+import {getRatingStyle} from '../../utils/util';
 import PropertyImageList from '../property-image-list/property-image-list';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {ThunkAppDispatch} from '../../types/action-type';
-import {fetchOfferByIdAction} from '../../store/api-actions';
+import {fetchCommentsByOfferAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import PropertyInsideList from '../property-inside-list/property-inside-list';
 import PropertyNearPlaceList from '../property-near-place-list/property-near-place-list';
+import Header from '../header/header';
+import PropertyHost from '../property-host/property-host';
+import PropertyReviews from '../property-reviews/property-reviews';
+import Map from '../map/map';
+import {MAX_NEAR_OFFERS} from '../../const';
 
 
-const mapStateToProps = ({offerById, offers}: State) => ({
+const mapStateToProps = ({offerById, nearbyOffers}: State) => ({
   offerById,
-  offers,
+  nearbyOffers,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   loadSelectedOffer(offerId: number) {
     dispatch(fetchOfferByIdAction(offerId));
-
+    dispatch(fetchCommentsByOfferAction(offerId));
+    dispatch(fetchNearbyOffersAction(offerId));
   },
 });
 
@@ -31,37 +33,18 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
-function PropertyScreen({offerById, offers, loadSelectedOffer}: PropsFromRedux): JSX.Element {
+function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer}: PropsFromRedux): JSX.Element {
   const offerId: {id: string} = useParams();
   useEffect(() => {
     loadSelectedOffer(Number(offerId.id));
   }, []);
-
-  const {host, images, type, rating, price, isFavorite, isPremium, title, bedrooms, maxAdults, description, goods} = offerById;
-  const {avatarUrl, isPro, name} = host;
+  const offersOnMap = nearbyOffers.slice(0, MAX_NEAR_OFFERS);
+  offersOnMap.push(offerById);
+  const {images, type, rating, price, isFavorite, isPremium, title, bedrooms, maxAdults, goods} = offerById;
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <UserProfile />
-                </li>
-                <li className="header__nav-item">
-                  <Logout />
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -112,62 +95,27 @@ function PropertyScreen({offerById, offers, loadSelectedOffer}: PropsFromRedux):
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <PropertyInsideList goods={goods} />
               </div>
-              <div className="property__host">
-                <h2 className="property__host-title">Meet the host</h2>
-                <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
-                  </div>
-                  <span className="property__user-name">
-                    {name}
-                  </span>
-                  <span className="property__user-status">
-                    {isPro ? 'Pro' : ''}
-                  </span>
-                </div>
-                <div className="property__description">
-                  <p className="property__text">
-                    {description}
-                  </p>
-                </div>
-              </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={getRatingStyle(4.3)} />
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                        The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                <ReviewForm />
-              </section>
+
+              <PropertyHost />
+
+              <PropertyReviews />
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+
+            <Map offersList={offersOnMap} selectedOffer={offerById}/>
+
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PropertyNearPlaceList offers={offers}/>
+
+            {useEffect(()=>{
+              <PropertyNearPlaceList nearbyOffers={nearbyOffers} loadSelectedOffer={loadSelectedOffer}/>;
+            }, [])}
+
+            <PropertyNearPlaceList nearbyOffers={nearbyOffers} loadSelectedOffer={loadSelectedOffer}/>
           </section>
         </div>
       </main>
