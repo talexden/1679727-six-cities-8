@@ -2,14 +2,26 @@ import FavoritesCardList from '../favorites-card-list/favorites-card-list';
 import {FavoritesMapType} from '../../types/favorite-map-type';
 import {getMapOffersByCities} from '../../utils/filters';
 import {nanoid} from 'nanoid';
-import {OfferType} from '../../types/offer-type';
+import {State} from '../../types/state-type';
+import {ThunkAppDispatch} from '../../types/action-type';
+import {fetchFavoritesAction} from '../../store/api-actions';
+import {connect, ConnectedProps} from 'react-redux';
 
-type FavoritesProps = {
-  favoriteOffers: OfferType[],
-}
+const mapStateToProps = ({favoriteOffers}: State) => ({
+  favoriteOffers,
+});
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  loadFavoriteOffers () {
+    dispatch(fetchFavoritesAction());
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
-function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
+function Favorites({favoriteOffers}: PropsFromRedux): JSX.Element {
   const favorites: FavoritesMapType = getMapOffersByCities(favoriteOffers);
   return (
     <main className="page__main page__main--favorites">
@@ -25,4 +37,6 @@ function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
   );
 }
 
-export default Favorites;
+export {Favorites};
+
+export default connector(Favorites);

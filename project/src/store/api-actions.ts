@@ -12,15 +12,15 @@ import {
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute, AuthorizationStatus, START_CITY} from '../const';
-import {OfferType} from '../types/offer-type';
+import {OfferAdaptedType} from '../types/offer-type';
 import {AuthDataType} from '../types/auth-data-type';
 import {Adapter} from '../utils/adapter';
-import { CommentType } from '../types/comment-type';
+import {CommentAdaptedType} from '../types/comment-type';
 import {AuthInfoType} from '../types/auth-info-type';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<OfferType[]>(APIRoute.Offers);
+    const {data} = await api.get<OfferAdaptedType[]>(APIRoute.Offers);
     const offers = data.map(Adapter.adaptOfferToClient);
     dispatch(loadOffers(offers));
     dispatch(setCity(START_CITY));
@@ -28,14 +28,14 @@ export const fetchOffersAction = (): ThunkActionResult =>
 
 export const fetchFavoritesAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<OfferType[]>(APIRoute.Favorite);
+    const {data} = await api.get<OfferAdaptedType[]>(APIRoute.Favorite);
     const favorites = data.map(Adapter.adaptOfferToClient);
     dispatch(loadFavorites(favorites));
   };
 
 export const postFavoriteAction = (offerId: number, status:number): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    const {data} = await api.post<AuthInfoType>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    const {data} = await api.post<OfferAdaptedType>(`${APIRoute.Favorite}/${offerId}/${status}`);
     const favoriteOffer = Adapter.adaptOfferToClient(data);
     dispatch(loadFavoriteOffer(favoriteOffer));
     dispatch(replaceOffer(favoriteOffer));
@@ -43,21 +43,21 @@ export const postFavoriteAction = (offerId: number, status:number): ThunkActionR
 
 export const fetchOfferByIdAction = (offerId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<OfferType>(`${APIRoute.Offers}/${offerId}`);
+    const {data} = await api.get<OfferAdaptedType>(`${APIRoute.Offers}/${offerId}`);
     const offer = Adapter.adaptOfferToClient(data);
     dispatch(loadOfferById(offer));
   };
 
 export const fetchCommentsByOfferAction = (offerId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<CommentType[]>(`${APIRoute.Comments}/${offerId}`);
+    const {data} = await api.get<CommentAdaptedType[]>(`${APIRoute.Comments}/${offerId}`);
     const comments = data.map(Adapter.adaptCommentToClient);
     dispatch(loadCommentsByOfferAction(comments));
   };
 
 export const fetchNearbyOffersAction = (offerId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<OfferType[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+    const {data} = await api.get<OfferAdaptedType[]>(`${APIRoute.Offers}/${offerId}/nearby`);
     const nearbyOffers = data.map(Adapter.adaptOfferToClient);
     dispatch(loadNearbyOffers(nearbyOffers));
   };

@@ -10,3 +10,16 @@ export type CommentType = {
     name: string,
   }
 }
+
+export type CommentAdaptedType = {
+  comment: string,
+  date: string,
+  id: number,
+  rating: number,
+  user: {
+    ['avatar_url']: string,
+    id: number,
+    ['is_pro']: boolean,
+    name: string,
+  }
+}

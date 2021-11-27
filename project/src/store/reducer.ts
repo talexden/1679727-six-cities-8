@@ -92,8 +92,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, sortedCityOffers};
     }
     case ActionType.ReplaceOffer:{
-      let offers = state.offers;
       const {favoriteOffer} = action.payload;
+      let offers = state.offers;
       if (favoriteOffer !== null) {
         const offerIndex = offers
           .findIndex((offer) => offer.id === favoriteOffer.id);
@@ -101,7 +101,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
           offers = [...state.offers.slice(0, offerIndex), favoriteOffer, ...state.offers.slice(offerIndex+1)];
         }
       }
-      return {...state, offers};
+
+      let offerById = state.offerById;
+      if (favoriteOffer !== null && offerById.id === favoriteOffer.id){
+        offerById = favoriteOffer;
+      }
+      return {...state, offers, offerById};
     }
     default:
       return state;

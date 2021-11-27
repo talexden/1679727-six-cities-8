@@ -3,7 +3,12 @@ import PropertyImageList from '../property-image-list/property-image-list';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {ThunkAppDispatch} from '../../types/action-type';
-import {fetchCommentsByOfferAction, fetchNearbyOffersAction, fetchOfferByIdAction} from '../../store/api-actions';
+import {
+  fetchCommentsByOfferAction,
+  fetchNearbyOffersAction,
+  fetchOfferByIdAction,
+  postFavoriteAction
+} from '../../store/api-actions';
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import PropertyInsideList from '../property-inside-list/property-inside-list';
@@ -13,18 +18,26 @@ import PropertyHost from '../property-host/property-host';
 import PropertyReviews from '../property-reviews/property-reviews';
 import Map from '../map/map';
 import {MAX_NEAR_OFFERS} from '../../const';
+import {OfferType} from '../../types/offer-type';
 
 
-const mapStateToProps = ({offerById, nearbyOffers}: State) => ({
+const mapStateToProps = ({offerById, nearbyOffers, offers}: State) => ({
   offerById,
   nearbyOffers,
+  offers,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   loadSelectedOffer(offerId: number) {
     dispatch(fetchOfferByIdAction(offerId));
     dispatch(fetchCommentsByOfferAction(offerId));
+  },
+  loadNearbyOffers(offerId:number) {
     dispatch(fetchNearbyOffersAction(offerId));
+  },
+  onClickFavorite(offer: OfferType) {
+    const status = Number(!offer.isFavorite);
+    dispatch(postFavoriteAction(offer.id, status));
   },
 });
 
@@ -33,11 +46,20 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
-function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer}: PropsFromRedux): JSX.Element {
+function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer, loadNearbyOffers, offers, onClickFavorite}: PropsFromRedux): JSX.Element {
   const offerId: {id: string} = useParams();
   useEffect(() => {
     loadSelectedOffer(Number(offerId.id));
   }, []);
+
+  useEffect(() => {
+    loadSelectedOffer(Number(offerId.id));
+  }, []);
+
+  useEffect(() => {
+    loadNearbyOffers(Number(offerId.id));
+  }, [offers]);
+
   const offersOnMap = nearbyOffers.slice(0, MAX_NEAR_OFFERS);
   offersOnMap.push(offerById);
   const {images, type, rating, price, isFavorite, isPremium, title, bedrooms, maxAdults, goods} = offerById;
@@ -62,7 +84,11 @@ function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer}: PropsFromR
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active ' : ''}button`} type="button">
+                <button
+                  className={`property__bookmark-button ${isFavorite ? 'property__bookmark-button--active ' : ''}button`}
+                  type="button"
+                  onClick={()=> onClickFavorite(offerById) }
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -111,11 +137,8 @@ function PropertyScreen({offerById, nearbyOffers, loadSelectedOffer}: PropsFromR
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            {useEffect(()=>{
-              <PropertyNearPlaceList nearbyOffers={nearbyOffers} loadSelectedOffer={loadSelectedOffer}/>;
-            }, [])}
-
             <PropertyNearPlaceList nearbyOffers={nearbyOffers} loadSelectedOffer={loadSelectedOffer}/>
+
           </section>
         </div>
       </main>

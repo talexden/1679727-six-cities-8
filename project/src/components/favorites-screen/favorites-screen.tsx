@@ -10,8 +10,9 @@ import Favorites from '../favorites/favorites';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 
-const mapStateToProps = ({favoriteOffers}: State) => ({
+const mapStateToProps = ({favoriteOffers,   favoriteOffer}: State) => ({
   favoriteOffers,
+  favoriteOffer,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -21,13 +22,12 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
-
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function FavoritesScreen({favoriteOffers, loadFavoriteOffers}: PropsFromRedux): JSX.Element {
+function FavoritesScreen({favoriteOffers, favoriteOffer, loadFavoriteOffers}: PropsFromRedux): JSX.Element {
   useEffect(()=>{
     loadFavoriteOffers();
-  }, []);
+  }, [favoriteOffer]);
 
   return (
     <div className="page">
@@ -50,7 +50,7 @@ function FavoritesScreen({favoriteOffers, loadFavoriteOffers}: PropsFromRedux): 
           </div>
         </div>
       </header>
-      {favoriteOffers.length > 0 ? <Favorites favoriteOffers={favoriteOffers}/> : <FavoritesEmpty />}
+      {favoriteOffers.length > 0 ? <Favorites /> : <FavoritesEmpty />}
       <footer className="footer container">
         <a className="footer__logo-link" href="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />

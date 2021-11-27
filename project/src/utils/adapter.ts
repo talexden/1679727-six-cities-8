@@ -1,9 +1,15 @@
 import { CommentType } from '../types/comment-type';
-import {OfferType} from '../types/offer-type';
+import {OfferAdaptedType, OfferType} from '../types/offer-type';
 
 export class Adapter {
-  static adaptOfferToClient(offer: any): OfferType {
-    const adaptedOffer = Object.assign(
+  static adaptOfferToClient(offer: OfferAdaptedType): OfferType {
+    const {
+      'is_favorite': del1,
+      'is_premium': del2,
+      'max_adults': del3,
+      'preview_image': del4,
+      ...adaptedOffer
+    } = Object.assign(
       {},
       offer,
       {
@@ -20,14 +26,10 @@ export class Adapter {
       },
     );
 
-    delete adaptedOffer['is_favorite'];
-    delete adaptedOffer['is_premium'];
-    delete adaptedOffer['max_adults'];
-    delete adaptedOffer['preview_image'];
-    delete adaptedOffer['host']['is_pro'];
-    delete adaptedOffer['host']['avatar_url'];
+    delete adaptedOffer.host['avatar_url'];
+    delete adaptedOffer.host['is_pro'];
 
-    return adaptedOffer;
+    return <OfferType>adaptedOffer;
   }
 
   static adaptCommentToClient(comment: any): CommentType {
