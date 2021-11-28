@@ -9,7 +9,7 @@ const initialState = {
   sortedCityOffers: [],
   commentPost: {
     comment: '',
-    rating: 0,
+    rating: '',
   },
   offers: [],
   offerById: INIT_OFFER,
@@ -31,6 +31,8 @@ const initialState = {
     name: '',
     token: '',
   },
+  isClearCommentForm: false,
+  isCommentLoading: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -45,6 +47,16 @@ const reducer = (state: State = initialState, action: Actions): State => {
     }
     case ActionType.SetComment: {
       return {...state, commentPost: action.payload};
+    }
+    case ActionType.ClearCommentForm: {
+      return {...state, isClearCommentForm: false};
+    }
+    case ActionType.PostOfferCommentRequest: {
+      return {...state, isCommentLoading: true};
+    }
+    case ActionType.PostOfferCommentSuccess: {
+      const {comments} = action.payload;
+      return {...state, comments, isCommentLoading: false, isClearCommentForm: true};
     }
     case ActionType.SetSelectedOffer:{
       const {selectedOffer} = action.payload;

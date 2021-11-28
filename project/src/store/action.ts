@@ -112,3 +112,18 @@ export const replaceOffer = (favoriteOffer: OfferType | null) => ({
     favoriteOffer,
   },
 } as const);
+
+export const clearCommentForm = () => ({
+  type: ActionType.ClearCommentForm,
+} as const);
+
+export const postOfferCommentRequest = () => ({
+  type: ActionType.PostOfferCommentRequest,
+} as const);
+
+export const postOfferCommentSuccess = (comments: CommentType[]) => ({
+  type: ActionType.PostOfferCommentSuccess,
+  payload: {
+    comments,
+  },
+} as const);

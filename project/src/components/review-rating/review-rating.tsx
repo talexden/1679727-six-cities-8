@@ -1,25 +1,31 @@
+import {ChangeEvent} from 'react';
+
 type ReviewRatingProps = {
-  isChecked: boolean,
-  id: number,
-  onClickRadio: () => void,
+  isChecked: string,
+  starNumber: string,
+  title: string,
+  onClickRadio: (evt: ChangeEvent<HTMLInputElement>) => void;
 }
 
 
-function ReviewRating({onClickRadio, isChecked, id}: ReviewRatingProps): JSX.Element {
-  const radioValue = `${id}`;
-  const radioId = `${id}-stars`;
+function ReviewRating({onClickRadio, isChecked, starNumber, title}: ReviewRatingProps): JSX.Element {
+  const radioId = `${starNumber}-stars`;
   return(
     <>
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        value={radioValue}
+        value={starNumber}
         id={radioId}
         type="radio"
-        checked={isChecked}
+        checked={starNumber === isChecked}
         onChange={onClickRadio}
       />
-      <label htmlFor={radioId} className="reviews__rating-label form__rating-label" title="good">
+      <label
+        htmlFor={radioId}
+        className="reviews__rating-label form__rating-label"
+        title={title}
+      >
         <svg className="form__star-image" width="37" height="33">
           <use xlinkHref="#icon-star" />
         </svg>

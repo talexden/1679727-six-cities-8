@@ -23,4 +23,6 @@ export type State = {
   isOffersLoaded: boolean,
   isOfferLoaded: boolean,
   authInfo: AuthInfoType,
+  isClearCommentForm: boolean,
+  isCommentLoading: boolean,
 };

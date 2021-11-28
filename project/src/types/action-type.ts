@@ -16,7 +16,12 @@ import {
   loadCommentsByOfferAction,
   loadUserInfo,
   setFavorite,
-  loadFavorites, loadFavoriteOffer, replaceOffer
+  loadFavorites,
+  loadFavoriteOffer,
+  replaceOffer,
+  clearCommentForm,
+  postOfferCommentRequest,
+  postOfferCommentSuccess
 } from '../store/action';
 
 
@@ -29,6 +34,7 @@ export enum ActionType {
   SetSelectedOffer = 'util/setSelectedOffer',
   SortCityOffers = 'util/sortCityOffer',
   ReplaceOffer = 'util/replaceOffer',
+  ClearCommentForm = 'util/clearCommentForm',
   LoadOffers = 'data/loadOffers',
   LoadOfferById = 'data/loadOffer',
   LoadNearbyOffers = 'data/loadNearbyOffers',
@@ -38,6 +44,8 @@ export enum ActionType {
   LoadFavorites = 'data/loadFavorites',
   LoadFavoriteOffer = 'data/loadFavoriteOffer',
   SetComment = 'data/setReview',
+  PostOfferCommentRequest = 'app/postOfferCommentRequest',
+  PostOfferCommentSuccess = 'app/postOfferCommentSuccess',
 }
 
 
@@ -45,6 +53,8 @@ export type Actions =
   | ReturnType<typeof setCity>
   | ReturnType<typeof setCityOffers>
   | ReturnType<typeof setComment>
+  | ReturnType<typeof postOfferCommentRequest>
+  | ReturnType<typeof postOfferCommentSuccess>
   | ReturnType<typeof setSelectedOffer>
   | ReturnType<typeof setFavorite>
   | ReturnType<typeof loadFavoriteOffer>
@@ -58,6 +68,7 @@ export type Actions =
   | ReturnType<typeof requireLogout>
   | ReturnType<typeof sortCityOffers>
   | ReturnType<typeof loadUserInfo>
+  | ReturnType<typeof clearCommentForm>
   | ReturnType<typeof redirectToRoute>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
