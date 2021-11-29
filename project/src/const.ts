@@ -31,7 +31,7 @@ export enum APIRoute {
   Favorite = '/favorite'
 }
 
-export const INIT_OFFER = {
+export const INITIAL_OFFER = {
   city: {
     location: {
       latitude: 0,
@@ -64,4 +64,34 @@ export const INIT_OFFER = {
   rating: 0,
   title: '',
   type: '',
+};
+
+export const initialState = {
+  cityName: '',
+  cityOffers: [],
+  sortedCityOffers: [],
+  commentPost: {
+    comment: '',
+    rating: 0,
+  },
+  offers: [],
+  offerById: INITIAL_OFFER,
+  selectedOffer: null,
+  editFavorite: null,
+  favoriteOffers: [],
+  favoriteOffer: null,
+  nearbyOffers: [],
+  comments: [],
+  isOffersLoaded: false,
+  isOfferLoaded: false,
+  reviews: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  authInfo: {
+    avatarUrl: '',
+    email: '',
+    id: 0,
+    isPro: false,
+    name: '',
+    token: '',
+  },
 };

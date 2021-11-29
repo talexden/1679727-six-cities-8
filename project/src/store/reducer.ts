@@ -1,37 +1,7 @@
 import {State} from '../types/state-type';
 import {Actions, ActionType} from '../types/action-type';
-import {AuthorizationStatus, INIT_OFFER} from '../const';
+import {AuthorizationStatus, initialState} from '../const';
 
-
-const initialState = {
-  cityName: '',
-  cityOffers: [],
-  sortedCityOffers: [],
-  commentPost: {
-    comment: '',
-    rating: 0,
-  },
-  offers: [],
-  offerById: INIT_OFFER,
-  selectedOffer: null,
-  editFavorite: null,
-  favoriteOffers: [],
-  favoriteOffer: null,
-  nearbyOffers: [],
-  comments: [],
-  isOffersLoaded: false,
-  isOfferLoaded: false,
-  reviews: [],
-  authorizationStatus: AuthorizationStatus.Unknown,
-  authInfo: {
-    avatarUrl: '',
-    email: '',
-    id: 0,
-    isPro: false,
-    name: '',
-    token: '',
-  },
-};
 
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
