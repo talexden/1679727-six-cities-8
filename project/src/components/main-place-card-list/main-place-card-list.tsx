@@ -1,5 +1,5 @@
 import MainPlaceCard from '../main-place-card/main-place-card';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {nanoid} from 'nanoid';
 import {OfferType} from '../../types/offer-type';
@@ -8,7 +8,7 @@ import {redirectToRoute, setSelectedOffer} from '../../store/action';
 import {postFavoriteAction} from '../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../const';
 
-const mapStateToProps = ({sortedCityOffers, authorizationStatus}: State) => ({
+const mapStateToProps = ({sortedCityOffers, authorizationStatus}: StateType) => ({
   sortedCityOffers,
   authorizationStatus,
 });

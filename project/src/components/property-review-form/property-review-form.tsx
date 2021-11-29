@@ -2,7 +2,7 @@ import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import ReviewRating from '../review-rating/review-rating';
 import {nanoid} from 'nanoid';
 import {connect, ConnectedProps, useDispatch} from 'react-redux';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {clearCommentForm} from '../../store/action';
 import {valueRatings} from '../../const';
 import {useParams} from 'react-router-dom';
@@ -16,7 +16,7 @@ type FormStateItemType = {
   maxValue?: number,
 };
 
-const mapStateToProps = ({isClearCommentForm, isCommentLoading}: State) => ({
+const mapStateToProps = ({isClearCommentForm, isCommentLoading}: StateType) => ({
   isClearCommentForm,
   isCommentLoading,
 });

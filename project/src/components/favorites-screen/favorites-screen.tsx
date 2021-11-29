@@ -1,7 +1,7 @@
 import HeaderLogo from '../header-logo/header-logo';
 import Logout from '../header-logout/header-logout';
 import UserProfile from '../header-user-profile/header-user-profile';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {useEffect} from 'react';
 import {ThunkAppDispatch} from '../../types/action-type';
@@ -10,7 +10,7 @@ import Favorites from '../favorites/favorites';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 
-const mapStateToProps = ({favoriteOffers,   favoriteOffer}: State) => ({
+const mapStateToProps = ({favoriteOffers,   favoriteOffer}: StateType) => ({
   favoriteOffers,
   favoriteOffer,
 });

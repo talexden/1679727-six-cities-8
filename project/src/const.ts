@@ -1,4 +1,6 @@
 import {valueRatingType} from './types/const';
+import {OfferType} from './types/offer-type';
+import {StateType} from './types/state-type';
 
 export const START_CITY = 'Paris';
 export const MAX_NEAR_OFFERS = 3;
@@ -41,16 +43,10 @@ export enum APIRoute {
 }
 
 export enum ErrorTexts {
-  FETCH_OFFER_BY_ID_FAIL_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
-  FETCH_NEARBY_OFFER_FAIL_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
-  FETCH_REVIEW_FAIL_MESSAGE = 'Не удалось получить комментарии. Попробуйте попозже',
   POST_REVIEW_FAIL_MESSAGE = 'Не удалось отправить комментарий. Попробуйте попозже',
-  FETCH_FAVORITE_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
-  POST_FAVORITE_MESSAGE = 'Не удалось отправить данные. Попробуйте попозже',
-  LOGIN_FAIL_MESSAGE = 'Не удалось залогиниться. Попробуйте попозже',
 }
 
-export const INITIAL_OFFER = {
+export const INITIAL_OFFER: OfferType = {
   city: {
     location: {
       latitude: 0,
@@ -84,8 +80,8 @@ export const INITIAL_OFFER = {
   title: '',
   type: '',
 };
-export const initialState = {
-  cityName: '',
+export const initialState: StateType = {
+  cityName: 'Paris',
   cityOffers: [],
   sortedCityOffers: [],
   commentPost: {
@@ -102,7 +98,6 @@ export const initialState = {
   comments: [],
   isOffersLoaded: false,
   isOfferLoaded: false,
-  reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   authInfo: {
     avatarUrl: '',

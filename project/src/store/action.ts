@@ -1,16 +1,17 @@
 import {ActionType} from '../types/action-type';
 import {OfferType} from '../types/offer-type';
-import {getCityOffers} from '../utils/filters';
 import {CommentPostType} from '../types/comment-post-type';
 import {AppRoute, AuthorizationStatus} from '../const';
 import {CommentType} from '../types/comment-type';
 import {AuthInfoType} from '../types/auth-info-type';
 import {createAction} from '@reduxjs/toolkit';
 
-// export const setCity = (cityName: string) => ({
-//   type: ActionType.SetCity,
-//   payload: cityName,
-// } as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute | string) => ({
+    payload: url,
+  }),
+);
 
 export const setCity = createAction(
   ActionType.SetCity,
@@ -21,9 +22,9 @@ export const setCity = createAction(
 
 export const setCityOffers = createAction(
   ActionType.SetCityOffers,
-  (cityName: string, offers: OfferType[]) => ({
+  (cityOffers: OfferType[]) => ({
     payload: {
-      cityOffers: getCityOffers(cityName, offers),
+      cityOffers,
     },
   }),
 );
@@ -88,13 +89,6 @@ export const requireAuthorization = createAction(
 );
 
 export const requireLogout = createAction(ActionType.RequireLogout);
-
-export const redirectToRoute = createAction(
-  ActionType.RedirectToRoute,
-  (url: AppRoute | string) => ({
-    payload: url,
-  }),
-);
 
 export const sortCityOffers = createAction(
   ActionType.SortCityOffers,

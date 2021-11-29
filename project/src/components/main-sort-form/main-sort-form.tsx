@@ -3,15 +3,16 @@ import {ThunkAppDispatch} from '../../types/action-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {sortCityOffers} from '../../store/action';
 import {SORT_ITEMS} from '../../const';
-import {State} from '../../types/state-type';
-import {useState} from 'react';
+import {StateType} from '../../types/state-type';
+import {useEffect, useState} from 'react';
 import {nanoid} from 'nanoid';
+import {toast} from 'react-toastify';
 
 const sortByPriceLoHi = (offers: OfferType[]) => [...offers].sort((a, b) => a.price > b.price ? 1 : -1);
 const sortByPriceHiLo = (offers: OfferType[]) => [...offers].sort((a, b) => a.price > b.price ? -1 : 1);
 const sortByRatingHiLo = (offers: OfferType[]) => [...offers].sort((a, b) => a.rating > b.rating ? 1 : -1);
 
-const mapStateToProps = ({cityOffers}: State) => ({
+const mapStateToProps = ({cityOffers}: StateType) => ({
   cityOffers: cityOffers,
 });
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) =>({
     switch (sortItem) {
       case SORT_ITEMS[0]:
         dispatch(sortCityOffers([...cityOffers]));
+        toast.info('sort');
         break;}
     switch (sortItem) {
       case SORT_ITEMS[1]:
@@ -45,12 +47,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 function MainSortForm ({cityOffers, sortOffers}: PropsFromRedux): JSX.Element {
   const [showFilterState, setShowFilterState] = useState(false);
   const [filterState, setFilterState] = useState('Popular');
-  const handleClick = (filterName: string, offers: OfferType[]) => {
-    sortOffers(filterName, offers);
-    setFilterState(filterName);
+  useEffect(()=>{
+    sortOffers(filterState, cityOffers);
     setShowFilterState(false);
-  };
-
+  }, [filterState, cityOffers]);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -64,7 +64,7 @@ function MainSortForm ({cityOffers, sortOffers}: PropsFromRedux): JSX.Element {
         {
           SORT_ITEMS.map((sortItem) => (
             <li
-              onClick={() => {handleClick(sortItem, cityOffers);}}
+              onClick={() => {setFilterState(sortItem);}}
               className="places__option"
               tabIndex={0}
               key={nanoid()}

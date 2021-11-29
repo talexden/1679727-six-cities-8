@@ -1,6 +1,6 @@
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
-import {State} from './state-type';
+import {StateType} from './state-type';
 import {
   loadOffers,
   loadOfferById,
@@ -71,7 +71,7 @@ export type Actions =
   | ReturnType<typeof clearCommentForm>
   | ReturnType<typeof redirectToRoute>;
 
-export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, StateType, AxiosInstance, Actions>;
 
-export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Actions>;
+export type ThunkAppDispatch = ThunkDispatch<StateType, AxiosInstance, Actions>;
 

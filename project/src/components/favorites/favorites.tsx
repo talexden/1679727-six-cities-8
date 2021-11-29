@@ -2,12 +2,12 @@ import FavoritesCardList from '../favorites-card-list/favorites-card-list';
 import {FavoritesMapType} from '../../types/favorite-map-type';
 import {getMapOffersByCities} from '../../utils/filters';
 import {nanoid} from 'nanoid';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {ThunkAppDispatch} from '../../types/action-type';
 import {fetchFavoritesAction} from '../../store/api-actions';
 import {connect, ConnectedProps} from 'react-redux';
 
-const mapStateToProps = ({favoriteOffers}: State) => ({
+const mapStateToProps = ({favoriteOffers}: StateType) => ({
   favoriteOffers,
 });
 

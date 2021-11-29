@@ -6,14 +6,14 @@ import {connect, ConnectedProps} from 'react-redux';
 import {redirectToRoute} from '../../store/action';
 import { nanoid } from 'nanoid';
 import {postFavoriteAction} from '../../store/api-actions';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 
 type PropertyNearPlaceListProps = {
   nearbyOffers: OfferType[],
   loadSelectedOffer: (offerId: number) => void,
 }
 
-const mapStateToProps = ({authorizationStatus}: State) => ({
+const mapStateToProps = ({authorizationStatus}: StateType) => ({
   authorizationStatus,
 });
 

@@ -2,7 +2,7 @@ import FavoritePlaceCard from '../favorite-place card/favorite-place-card';
 import {Link} from 'react-router-dom';
 import {OfferType} from '../../types/offer-type';
 import {nanoid} from 'nanoid';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {ThunkAppDispatch} from '../../types/action-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {redirectToRoute, setCity} from '../../store/action';
@@ -14,7 +14,7 @@ type FavoritesListProps = {
   cityName: string,
 }
 
-const mapStateToProps = ({favoriteOffers}: State) => ({
+const mapStateToProps = ({favoriteOffers}: StateType) => ({
   favoriteOffers,
 });
 

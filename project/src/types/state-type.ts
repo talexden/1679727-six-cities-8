@@ -1,11 +1,10 @@
 import {OfferType} from './offer-type';
 import {CommentPostType} from './comment-post-type';
-import {ReviewType} from './review-type';
-import {AuthorizationStatus} from '../const';
 import {CommentType} from './comment-type';
+import {AuthorizationStatus} from '../const';
 import {AuthInfoType} from './auth-info-type';
 
-export type State = {
+export type StateType = {
   cityName: string,
   cityOffers: OfferType[],
   sortedCityOffers: OfferType[],
@@ -18,7 +17,6 @@ export type State = {
   editFavorite: OfferType | null,
   comments: CommentType[],
   nearbyOffers: OfferType[],
-  reviews: ReviewType[],
   authorizationStatus: AuthorizationStatus,
   isOffersLoaded: boolean,
   isOfferLoaded: boolean,

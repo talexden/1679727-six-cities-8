@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {AppRoute, AuthorizationStatus} from '../../const';
 
 
-const mapStateToProps = ({authorizationStatus, authInfo}: State) => ({
+const mapStateToProps = ({authorizationStatus, authInfo}: StateType) => ({
   authorizationStatus,
   authInfo,
 });

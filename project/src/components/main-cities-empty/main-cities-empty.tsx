@@ -1,7 +1,7 @@
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 
-const mapStateToProps = ({cityName}: State) => ({
+const mapStateToProps = ({cityName}: StateType) => ({
   cityName,
 });
 

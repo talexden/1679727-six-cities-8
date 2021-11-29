@@ -1,6 +1,6 @@
 import {getRatingStyle} from '../../utils/util';
 import PropertyCommentForm from '../property-review-form/property-review-form';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {nanoid} from 'nanoid';
 import {AppRoute, AuthorizationStatus, COMMENT_LIST_SIZE} from '../../const';
@@ -9,7 +9,7 @@ import {formatDateYYYYMMDD, formatDateMMMMYYYY} from '../../utils/util';
 import {Link} from 'react-router-dom';
 
 
-const mapStateToProps = ({comments, authorizationStatus}: State) => ({
+const mapStateToProps = ({comments, authorizationStatus}: StateType) => ({
   comments,
   authorizationStatus,
 });

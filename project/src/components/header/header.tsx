@@ -2,11 +2,11 @@ import HeaderLogo from '../header-logo/header-logo';
 import UserProfile from '../header-user-profile/header-user-profile';
 import Logout from '../header-logout/header-logout';
 import {AuthorizationStatus} from '../../const';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 
 
-const mapStateToProps = ({authorizationStatus}: State) => ({
+const mapStateToProps = ({authorizationStatus}: StateType) => ({
   authorizationStatus,
 });
 

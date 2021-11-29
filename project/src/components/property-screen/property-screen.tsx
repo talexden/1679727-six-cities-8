@@ -1,6 +1,6 @@
 import {getRatingStyle} from '../../utils/util';
 import PropertyImageList from '../property-image-list/property-image-list';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {ThunkAppDispatch} from '../../types/action-type';
 import {
@@ -22,7 +22,7 @@ import {OfferType} from '../../types/offer-type';
 import {redirectToRoute} from '../../store/action';
 
 
-const mapStateToProps = ({offerById, nearbyOffers, offers, authorizationStatus}: State) => ({
+const mapStateToProps = ({offerById, nearbyOffers, offers, authorizationStatus}: StateType) => ({
   offerById,
   nearbyOffers,
   offers,

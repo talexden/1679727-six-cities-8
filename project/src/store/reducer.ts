@@ -1,77 +1,86 @@
-import {State} from '../types/state-type';
-import {Actions, ActionType} from '../types/action-type';
 import {AuthorizationStatus, initialState} from '../const';
+import {
+  clearCommentForm,
+  loadCommentsByOfferAction,
+  loadFavoriteOffer,
+  loadFavorites,
+  loadNearbyOffers,
+  loadOfferById,
+  loadOffers,
+  loadUserInfo,
+  postOfferCommentRequest,
+  postOfferCommentSuccess,
+  replaceOffer,
+  requireAuthorization,
+  requireLogout,
+  setCity,
+  setCityOffers,
+  setComment,
+  setFavorite,
+  setSelectedOffer, sortCityOffers
+} from './action';
+import {createReducer} from '@reduxjs/toolkit';
 
 
-const reducer = (state: State = initialState, action: Actions): State => {
-  switch (action.type) {
-
-    case ActionType.SetCity: {
-      return {...state, cityName: action.payload};
-    }
-    case ActionType.SetCityOffers: {
+const reducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setCity, (state, action) => {
+      state.cityName = action.payload;
+    })
+    .addCase(setCityOffers, (state, action) => {
       const {cityOffers} = action.payload;
-      return {...state, cityOffers, sortedCityOffers: [...cityOffers]};
-    }
-    case ActionType.SetComment: {
-      return {...state, commentPost: action.payload};
-    }
-    case ActionType.ClearCommentForm: {
-      return {...state, isClearCommentForm: false};
-    }
-    case ActionType.PostOfferCommentRequest: {
-      return {...state, isCommentLoading: true};
-    }
-    case ActionType.PostOfferCommentSuccess: {
-      const {comments} = action.payload;
-      return {...state, comments, isCommentLoading: false, isClearCommentForm: true};
-    }
-    case ActionType.SetSelectedOffer:{
+      state.cityOffers = cityOffers;
+    })
+    .addCase(setComment, (state, action) => {
+      state.commentPost = action.payload;
+    })
+    .addCase(setSelectedOffer, (state, action) => {
       const {selectedOffer} = action.payload;
-      return {...state, selectedOffer};
-    }
-    case ActionType.SetFavorite:{
-      return {...state, editFavorite: action.payload};
-    }
-    case ActionType.LoadFavorites:{
-      const {favoriteOffers} = action.payload;
-      return {...state, favoriteOffers};
-    }
-    case ActionType.LoadFavoriteOffer:{
-      const {favoriteOffer} = action.payload;
-      return {...state, favoriteOffer};
-    }
-    case ActionType.LoadOffers: {
+      state.selectedOffer = selectedOffer;
+    })
+    .addCase(loadOffers, (state, action) => {
       const {offers} = action.payload;
-      return {...state, offers};
-    }
-    case ActionType.LoadOfferById: {
+      state.offers = offers;
+    })
+    .addCase(loadOfferById, (state, action) => {
       const {offerById} = action.payload;
-      return {...state, offerById};
-    }
-    case ActionType.LoadCommentsByOfferAction: {
+      state.offerById = offerById;
+    })
+    .addCase(loadCommentsByOfferAction, (state, action) => {
       const {comments} = action.payload;
-      return {...state, comments};
-    }
-    case ActionType.LoadNearbyOffers: {
+      state.comments = comments;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
       const {nearbyOffers} = action.payload;
-      return {...state, nearbyOffers};
-    }
-    case ActionType.LoadUserInfo: {
+      state.nearbyOffers = nearbyOffers;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+      state.isOffersLoaded = true;
+    })
+    .addCase(requireLogout, (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(loadUserInfo, (state, action) => {
       const {authInfo} = action.payload;
-      return {...state, authInfo};
-    }
-    case ActionType.RequireAuthorization: {
-      return {...state, authorizationStatus: action.payload, isOffersLoaded: true};
-    }
-    case ActionType.RequireLogout: {
-      return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
-    }
-    case ActionType.SortCityOffers:{
+      state.authInfo = authInfo;
+    })
+    .addCase(sortCityOffers, (state, action) => {
       const {sortedCityOffers} = action.payload;
-      return {...state, sortedCityOffers};
-    }
-    case ActionType.ReplaceOffer:{
+      state.sortedCityOffers = sortedCityOffers;
+    })
+    .addCase(setFavorite, (state, action) => {
+      state.editFavorite = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      const {favoriteOffers} = action.payload;
+      state.favoriteOffers = favoriteOffers;
+    })
+    .addCase(loadFavoriteOffer, (state, action) => {
+      const {favoriteOffer} = action.payload;
+      state.favoriteOffer = favoriteOffer;
+    })
+    .addCase(replaceOffer, (state, action) => {
       const {favoriteOffer} = action.payload;
       let offers = state.offers;
       if (favoriteOffer !== null) {
@@ -86,11 +95,21 @@ const reducer = (state: State = initialState, action: Actions): State => {
       if (favoriteOffer !== null && offerById.id === favoriteOffer.id){
         offerById = favoriteOffer;
       }
-      return {...state, offers, offerById};
-    }
-    default:
-      return state;
-  }
-};
+      state.offers = offers;
+      state.offerById = offerById;
+    })
+    .addCase(clearCommentForm, (state) => {
+      state.isClearCommentForm = false;
+    })
+    .addCase(postOfferCommentRequest, (state) => {
+      state.isCommentLoading = true;
+    })
+    .addCase(postOfferCommentSuccess, (state, action) => {
+      const {comments} = action.payload;
+      state.comments = comments;
+      state.isCommentLoading = false;
+      state.isClearCommentForm = true;
+    });
+});
 
 export {reducer};

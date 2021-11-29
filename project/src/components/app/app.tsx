@@ -8,7 +8,7 @@ import PropertyScreen from '../property-screen/property-screen';
 import ErrorScreen from '../error-screen/error-screen';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {State} from '../../types/state-type';
+import {StateType} from '../../types/state-type';
 import browserHistory from '../../browser-history';
 
 
@@ -16,7 +16,7 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 
-const mapStateToProps = ({authorizationStatus, isOffersLoaded}: State) => ({
+const mapStateToProps = ({authorizationStatus, isOffersLoaded}: StateType) => ({
   authorizationStatus,
   isOffersLoaded,
 });
