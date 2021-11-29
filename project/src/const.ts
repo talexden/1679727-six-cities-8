@@ -1,3 +1,5 @@
+import {valueRatingType} from './types/const';
+
 export const START_CITY = 'Paris';
 export const MAX_NEAR_OFFERS = 3;
 export const MAX_PROPERTY_IMAGE = 6;
@@ -22,6 +24,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const valueRatings: valueRatingType = {
+  '5': 'perfect',
+  '4': 'good',
+  '3': 'not bad',
+  '2': 'badly',
+  '1': 'terribly',
+};
 
 export enum APIRoute {
   Offers = '/hotels',
@@ -29,6 +38,16 @@ export enum APIRoute {
   Logout = '/logout',
   Comments = '/comments',
   Favorite = '/favorite'
+}
+
+export enum ErrorTexts {
+  FETCH_OFFER_BY_ID_FAIL_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
+  FETCH_NEARBY_OFFER_FAIL_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
+  FETCH_REVIEW_FAIL_MESSAGE = 'Не удалось получить комментарии. Попробуйте попозже',
+  POST_REVIEW_FAIL_MESSAGE = 'Не удалось отправить комментарий. Попробуйте попозже',
+  FETCH_FAVORITE_MESSAGE = 'Не удалось получить данные. Попробуйте попозже',
+  POST_FAVORITE_MESSAGE = 'Не удалось отправить данные. Попробуйте попозже',
+  LOGIN_FAIL_MESSAGE = 'Не удалось залогиниться. Попробуйте попозже',
 }
 
 export const INITIAL_OFFER = {
@@ -65,14 +84,13 @@ export const INITIAL_OFFER = {
   title: '',
   type: '',
 };
-
 export const initialState = {
   cityName: '',
   cityOffers: [],
   sortedCityOffers: [],
   commentPost: {
     comment: '',
-    rating: 0,
+    rating: '',
   },
   offers: [],
   offerById: INITIAL_OFFER,
@@ -94,4 +112,6 @@ export const initialState = {
     name: '',
     token: '',
   },
+  isClearCommentForm: false,
+  isCommentLoading: false,
 };

@@ -4,19 +4,21 @@ import {
   loadFavorites,
   loadNearbyOffers,
   loadOfferById,
-  loadOffers, loadUserInfo,
+  loadOffers, loadUserInfo, postOfferCommentRequest, postOfferCommentSuccess,
   redirectToRoute, replaceOffer,
   requireAuthorization,
   requireLogout,
   setCity
 } from './action';
 import {saveToken, dropToken} from '../services/token';
-import {APIRoute, AppRoute, AuthorizationStatus, START_CITY} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus, ErrorTexts, START_CITY} from '../const';
 import {OfferAdaptedType} from '../types/offer-type';
 import {AuthDataType} from '../types/auth-data-type';
 import {Adapter} from '../utils/adapter';
 import {CommentAdaptedType} from '../types/comment-type';
 import {AuthInfoType} from '../types/auth-info-type';
+import {CommentPostType} from '../types/comment-post-type';
+import {toast} from 'react-toastify';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -53,6 +55,18 @@ export const fetchCommentsByOfferAction = (offerId: number): ThunkActionResult =
     const {data} = await api.get<CommentAdaptedType[]>(`${APIRoute.Comments}/${offerId}`);
     const comments = data.map(Adapter.adaptCommentToClient);
     dispatch(loadCommentsByOfferAction(comments));
+  };
+
+export const sendCommentAction = (offerId: string, Comment: CommentPostType): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(postOfferCommentRequest());
+    try{
+      const {data} = await api.post(`${APIRoute.Comments}/${offerId}`, Comment);
+      const comments = data.map(Adapter.adaptCommentToClient);
+      dispatch(postOfferCommentSuccess(comments));
+    } catch (error: any) {
+      toast.warn(ErrorTexts.POST_REVIEW_FAIL_MESSAGE);
+    }
   };
 
 export const fetchNearbyOffersAction = (offerId: number): ThunkActionResult =>

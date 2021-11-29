@@ -1,11 +1,12 @@
 import {getRatingStyle} from '../../utils/util';
-import ReviewForm from '../review-form/review-form';
+import PropertyCommentForm from '../property-review-form/property-review-form';
 import {State} from '../../types/state-type';
 import {connect, ConnectedProps} from 'react-redux';
 import {nanoid} from 'nanoid';
-import {AuthorizationStatus, COMMENT_LIST_SIZE} from '../../const';
+import {AppRoute, AuthorizationStatus, COMMENT_LIST_SIZE} from '../../const';
 import {CommentType} from '../../types/comment-type';
 import {formatDateYYYYMMDD, formatDateMMMMYYYY} from '../../utils/util';
+import {Link} from 'react-router-dom';
 
 
 const mapStateToProps = ({comments, authorizationStatus}: State) => ({
@@ -22,7 +23,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 function PropertyReviews({comments, authorizationStatus}: PropsFromRedux): JSX.Element {
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.slice(0, COMMENT_LIST_SIZE).length}</span></h2>
       <ul className="reviews__list">
         {
           sortCommentsByDate(comments).slice(0, COMMENT_LIST_SIZE).map((comment)=>(
@@ -47,7 +48,7 @@ function PropertyReviews({comments, authorizationStatus}: PropsFromRedux): JSX.E
           ))
         }
       </ul>
-      {(authorizationStatus === AuthorizationStatus.Auth) ? <ReviewForm /> : '' }
+      {(authorizationStatus === AuthorizationStatus.Auth) ? <PropertyCommentForm /> : <p>Only registered users can add reviews. <Link to={AppRoute.SignIn}><b>Sing in</b></Link></p> }
     </section>
   );
 }

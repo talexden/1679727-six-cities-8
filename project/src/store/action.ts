@@ -147,3 +147,16 @@ export const replaceOffer = createAction(
     },
   }),
 );
+
+export const clearCommentForm = createAction(ActionType.ClearCommentForm);
+
+export const postOfferCommentRequest = createAction(ActionType.PostOfferCommentRequest);
+
+export const postOfferCommentSuccess = createAction(
+  ActionType.PostOfferCommentSuccess,
+  (comments: CommentType[]) => ({
+    payload: {
+      comments,
+    },
+  }),
+);
