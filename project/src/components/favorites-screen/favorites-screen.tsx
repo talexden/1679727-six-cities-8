@@ -50,7 +50,7 @@ function FavoritesScreen({favoriteOffers, favoriteOffer, loadFavoriteOffers}: Pr
           </div>
         </div>
       </header>
-      {favoriteOffers.length > 0 ? <Favorites /> : <FavoritesEmpty />}
+      {favoriteOffers !== null && favoriteOffers.length > 0 ? <Favorites /> : <FavoritesEmpty />}
       <footer className="footer container">
         <a className="footer__logo-link" href="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />

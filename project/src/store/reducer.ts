@@ -32,7 +32,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.cityOffers = cityOffers;
     })
     .addCase(setComment, (state, action) => {
-      state.commentPost = action.payload;
+      const {commentPost} = action.payload;
+      state.commentPost = commentPost;
     })
     .addCase(setSelectedOffer, (state, action) => {
       const {selectedOffer} = action.payload;
@@ -70,7 +71,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.sortedCityOffers = sortedCityOffers;
     })
     .addCase(setFavorite, (state, action) => {
-      state.editFavorite = action.payload;
+      const {editFavorite} = action.payload;
+      state.editFavorite = editFavorite;
     })
     .addCase(loadFavorites, (state, action) => {
       const {favoriteOffers} = action.payload;

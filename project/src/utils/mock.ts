@@ -1,6 +1,8 @@
 import {OfferType} from '../types/offer-type';
 import {AuthInfoType} from '../types/auth-info-type';
 import {CommentType} from '../types/comment-type';
+import * as fake from 'faker';
+import {CommentPostType} from '../types/comment-post-type';
 
 export const mockFavoriteOffer: OfferType = {
   description: 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
@@ -92,4 +94,18 @@ export const mockUserData: AuthInfoType = {
   isPro: false,
   name: 'mock',
   token: 'secret',
+};
+
+export const mockCommentPost: CommentPostType = {
+  comment: fake.lorem.paragraph(),
+  rating: '4',
+};
+
+export const mockAuthInfo: AuthInfoType = {
+  id: fake.random.number(100),
+  email: fake.internet.email(),
+  name: fake.name.firstName(),
+  token: fake.internet.password(),
+  avatarUrl: fake.image.imageUrl(),
+  isPro: fake.random.boolean(),
 };

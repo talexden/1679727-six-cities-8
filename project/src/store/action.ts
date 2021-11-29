@@ -32,7 +32,9 @@ export const setCityOffers = createAction(
 export const setComment = createAction(
   ActionType.SetComment,
   (commentPost: CommentPostType) => ({
-    payload: commentPost,
+    payload: {
+      commentPost,
+    },
   }),
 );
 
@@ -111,13 +113,15 @@ export const loadUserInfo = createAction(
 export const setFavorite = createAction(
   ActionType.SetFavorite,
   (editFavorite: OfferType | null) => ({
-    payload: editFavorite,
+    payload: {
+      editFavorite,
+    },
   }),
 );
 
 export const loadFavorites = createAction(
   ActionType.LoadFavorites,
-  (favoriteOffers: OfferType[]) => ({
+  (favoriteOffers: OfferType[] | null) => ({
     payload: {
       favoriteOffers,
     },
@@ -126,7 +130,7 @@ export const loadFavorites = createAction(
 
 export const loadFavoriteOffer = createAction(
   ActionType.LoadFavoriteOffer,
-  (favoriteOffer: OfferType) => ({
+  (favoriteOffer: OfferType | null) => ({
     payload: {
       favoriteOffer,
     },

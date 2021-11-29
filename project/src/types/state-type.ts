@@ -12,7 +12,7 @@ export type StateType = {
   offers: OfferType[],
   offerById: OfferType,
   selectedOffer: OfferType | null,
-  favoriteOffers: OfferType[],
+  favoriteOffers: OfferType[] | null,
   favoriteOffer: OfferType | null,
   editFavorite: OfferType | null,
   comments: CommentType[],
