@@ -64,7 +64,7 @@ export const sendCommentAction = (offerId: string, Comment: CommentPostType): Th
       const {data} = await api.post(`${APIRoute.Comments}/${offerId}`, Comment);
       const comments = data.map(Adapter.adaptCommentToClient);
       dispatch(postOfferCommentSuccess(comments));
-    } catch (error: any) {
+    } catch (error) {
       toast.warn(ErrorTexts.POST_REVIEW_FAIL_MESSAGE);
     }
   };

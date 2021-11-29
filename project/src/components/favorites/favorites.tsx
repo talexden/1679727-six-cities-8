@@ -22,7 +22,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
 function Favorites({favoriteOffers}: PropsFromRedux): JSX.Element {
-  const favorites: FavoritesMapType = getMapOffersByCities(favoriteOffers);
+  let favorites: FavoritesMapType = new Map();
+  if (favoriteOffers !== null){
+    favorites = getMapOffersByCities(favoriteOffers);
+  }
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">

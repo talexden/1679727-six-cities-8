@@ -6,7 +6,6 @@ import {SORT_ITEMS} from '../../const';
 import {StateType} from '../../types/state-type';
 import {useEffect, useState} from 'react';
 import {nanoid} from 'nanoid';
-import {toast} from 'react-toastify';
 
 const sortByPriceLoHi = (offers: OfferType[]) => [...offers].sort((a, b) => a.price > b.price ? 1 : -1);
 const sortByPriceHiLo = (offers: OfferType[]) => [...offers].sort((a, b) => a.price > b.price ? -1 : 1);
@@ -22,7 +21,6 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) =>({
     switch (sortItem) {
       case SORT_ITEMS[0]:
         dispatch(sortCityOffers([...cityOffers]));
-        toast.info('sort');
         break;}
     switch (sortItem) {
       case SORT_ITEMS[1]:

@@ -1,4 +1,4 @@
-## Личный проект «Шесть городов»
+# Личный проект «Шесть городов»
 
 * Студент: [Aleksey Titov](https://up.htmlacademy.ru/react/8/user/1679727).
 * Наставник: [Александр Григорьев](https://htmlacademy.ru/profile/fuckhtml).
